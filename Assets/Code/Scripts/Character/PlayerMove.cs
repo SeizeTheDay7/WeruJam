@@ -5,29 +5,38 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("Component")]
+    [SerializeField] InputActionAsset actions;
     [SerializeField] CinemachineCamera player_vcam;
-    [SerializeField] float walk_gap = 0.5f;
-    [SerializeField] float amplitudeGain_walk = 2f;
-    [SerializeField] float frequencyGain_walk = 1.5f;
-    [SerializeField] float run_gap = 0.25f;
-    [SerializeField] float amplitudeGain_run = 3f;
-    [SerializeField] float frequencyGain_run = 2.2f;
-    [SerializeField] AudioClip[] footstepSounds;
-    [SerializeField] private AudioSource footstep;
-    public float moveSpeed = 5f;
-    [SerializeField] float runMult = 1.5f;
-    private CharacterController characterController;
     [SerializeField] private CinemachineImpulseSource impulse_walk;
     [SerializeField] private CinemachineImpulseSource impulse_run;
     private CinemachineBasicMultiChannelPerlin noise;
+    private CharacterController characterController;
+
+    [Header("Parameter")]
+    public float moveSpeed = 5f;
+    [SerializeField] private float gravityMult = 3f;
+    [SerializeField] private float jumpMult = 1f;
+    [SerializeField] float runMult = 1.5f;
+    [SerializeField] float walk_gap = 0.5f;
+    [SerializeField] float run_gap = 0.25f;
+    [SerializeField] float amplitudeGain_walk = 2f;
+    [SerializeField] float frequencyGain_walk = 1.5f;
+    [SerializeField] float amplitudeGain_run = 3f;
+    [SerializeField] float frequencyGain_run = 2.2f;
+
+    [Header("Audio")]
+    [SerializeField] AudioClip[] footstepSounds;
+    [SerializeField] private AudioSource footstep;
+
+    [Header("Calculation")]
     private bool wait_nextFootstep = false;
     private float targetAmplitudeGain;
     private float targetFrequencyGain;
     private float gravity = -9.81f;
-    [SerializeField] private float gravityMult = 3f;
-    [SerializeField] private float jumpMult = 1f;
     private float verticalVelocity;
-    [SerializeField] InputActionAsset actions;
+
+    [Header("Action")]
     InputAction moveAction;
     InputAction leftShiftAction;
     InputAction jumpAction;
@@ -38,26 +47,28 @@ public class PlayerMove : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         noise = player_vcam.GetComponent<CinemachineBasicMultiChannelPerlin>();
         footstep = GetComponent<AudioSource>();
+
         Cursor.lockState = CursorLockMode.Locked; // 마우스를 화면 중앙에 고정
         Cursor.visible = false; // 마우스 커서 숨김
+
         moveAction = actions.FindAction("Move");
-        leftShiftAction = actions.FindAction("LeftShift");
         jumpAction = actions.FindAction("Jump");
+        leftShiftAction = actions.FindAction("LeftShift");
     }
 
     void OnEnable()
     {
         wait_nextFootstep = false;
         moveAction.Enable();
-        leftShiftAction.Enable();
         jumpAction.Enable();
+        leftShiftAction.Enable();
     }
 
     void OnDisable()
     {
         moveAction.Disable();
-        leftShiftAction.Disable();
         jumpAction.Disable();
+        leftShiftAction.Disable();
     }
 
     void Update()

@@ -3,10 +3,16 @@ using Unity.Cinemachine;
 using System.Collections;
 using UnityEngine.InputSystem;
 
+public enum IMove
+{
+    Idle,
+    Walk,
+    Run,
+}
+
 public class PlayerMove : MonoBehaviour
 {
     [Header("Component")]
-    [SerializeField] InputActionAsset actions;
     [SerializeField] CinemachineCamera player_vcam;
     [SerializeField] private CinemachineImpulseSource impulse_walk;
     [SerializeField] private CinemachineImpulseSource impulse_run;
@@ -48,9 +54,10 @@ public class PlayerMove : MonoBehaviour
         noise = player_vcam.GetComponent<CinemachineBasicMultiChannelPerlin>();
         footstep = GetComponent<AudioSource>();
 
-        Cursor.lockState = CursorLockMode.Locked; // 마우스를 화면 중앙에 고정
-        Cursor.visible = false; // 마우스 커서 숨김
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
+        InputActionAsset actions = InputSystem.actions;
         moveAction = actions.FindAction("Move");
         jumpAction = actions.FindAction("Jump");
         leftShiftAction = actions.FindAction("LeftShift");
@@ -92,7 +99,7 @@ public class PlayerMove : MonoBehaviour
         if (input.x < 0) direction += -player_vcam.transform.right;
         if (input.x > 0) direction += player_vcam.transform.right;
 
-        direction.y = 0f; // y축 이동 방지
+        direction.y = 0f; // y축 성분 제거하여 정규화 크기 오염 방지
         direction.Normalize();
         if (leftShiftAction.IsPressed()) direction *= runMult;
     }

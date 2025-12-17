@@ -22,4 +22,9 @@ public class Enemy : MonoBehaviour
     {
         agent.SetDestination(target.position);
     }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

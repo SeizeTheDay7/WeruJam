@@ -171,6 +171,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8454314573646174276, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: weaponList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454314573646174276, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: 'weaponList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4463501753658771187, guid: 2250fd0317b350740b919f96831b4a40, type: 3}
+    - target: {fileID: 8454314573646174276, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: 'weaponList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 4463501753658771187, guid: fb857d57343408c449c4ed3126bcbbfa, type: 3}
+    - target: {fileID: 8454314573646174276, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: 'weaponList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 4463501753658771187, guid: fe42cc525fc2b3449bed772761422d10, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

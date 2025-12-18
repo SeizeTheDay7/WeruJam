@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class SceneManager : MonoBehaviour
+public class SceneManager : Singleton<SceneManager>
 {
     [SerializeField] string mainSceneName = "Main";
     [SerializeField] string gameSceneName = "Game";

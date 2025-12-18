@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 using UnityEngine.AI;
+using UnityEngine.Pool;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -23,7 +24,61 @@ public class EnemyManager : MonoBehaviour
     int navmeshAreaMask = NavMesh.AllAreas;
     bool canUpdateTarget = true;
     bool canSpawn = true;
-    List<Enemy> enemies = new();
+    HashSet<Enemy> enemies = new(); // 현재 스폰된 눈사람들
+    public ObjectPool<Enemy> enemyPool { get; private set; }
+    Vector3 enemySpawnPosition;
+
+    void Awake()
+    {
+        enemyPool = new ObjectPool<Enemy>(
+            createFunc: OnCreatePoolEnemy,
+            actionOnGet: OnGetEnemyFromPool,
+            actionOnRelease: OnReleaseEnemyToPool,
+            actionOnDestroy: OnDestroyPoolEnemy,
+            collectionCheck: true,
+            defaultCapacity: 20,
+            maxSize: 100
+        );
+    }
+
+    private Enemy OnCreatePoolEnemy()
+    {
+        Enemy enemy = Instantiate(enemyPrefab).GetComponent<Enemy>();
+        enemy.OnCollapse += OnEnemyCollapse;
+        return enemy;
+    }
+
+    private void OnEnemyCollapse(Enemy enemy)
+    {
+        enemyPool.Release(enemy);
+    }
+
+    /// <summary>
+    /// 눈사람 새로 만들어낼 때 호출됨
+    /// </summary>
+    private void OnGetEnemyFromPool(Enemy enemy)
+    {
+        enemy.Init();
+        enemy.transform.position = enemySpawnPosition;
+        enemy.gameObject.SetActive(true);
+        enemies.Add(enemy);
+    }
+
+    /// <summary>
+    /// 아예 눈사람 무너져서 사라질 때 Release로 호출됨
+    /// </summary>
+    private void OnReleaseEnemyToPool(Enemy enemy)
+    {
+        enemy.gameObject.SetActive(false);
+        enemies.Remove(enemy);
+    }
+
+    private void OnDestroyPoolEnemy(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+        enemy.OnCollapse -= OnEnemyCollapse;
+        Destroy(enemy);
+    }
 
     void Update()
     {
@@ -37,12 +92,11 @@ public class EnemyManager : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             if (enemy == null) continue;
-            if (!enemy.agent.enabled) continue;
+            if (enemy.agent.isStopped) continue;
             enemy.SetTarget(player.transform);
         }
         yield return new WaitForSeconds(followTargetInterval);
         canUpdateTarget = true;
-
     }
 
     private IEnumerator CoSpawn()
@@ -51,11 +105,9 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < spawnAmount; i++)
         {
-            Vector3 spawnPosition = GetSpawnPoint(i);
-            if (spawnPosition == Vector3.zero) continue;
-            Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<Enemy>();
-            enemy.Init();
-            enemies.Add(enemy);
+            enemySpawnPosition = GetSpawnPoint(i);
+            if (enemySpawnPosition == Vector3.zero) continue;
+            enemyPool.Get(); // 초기화는 OnGet에서 전부 처리
         }
 
         yield return new WaitForSeconds(spawnInterval);

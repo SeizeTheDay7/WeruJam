@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
+using System;
 
 public class Enemy : MonoBehaviour
 {
     [HideInInspector] public NavMeshAgent agent;
     [SerializeField] Transform graphic;
+    public event Action<Enemy> OnCollapse;
 
     void Awake()
     {
@@ -25,6 +27,12 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        // 눈 빛내는거 없애고 이동 멈추기
+        agent.isStopped = true;
+    }
+
+    public void Collapse()
+    {
+        OnCollapse?.Invoke(this);
     }
 }

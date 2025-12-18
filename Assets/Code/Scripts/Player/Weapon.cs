@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
 
     public event Action<Weapon> OnDestroyed;
     Rigidbody rb;
-    bool isDestroyed = false;
+    bool isTerminated = false;
 
     void Awake()
     {
@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (isDestroyed) return;
+        if (isTerminated) return;
 
         int colMask = 1 << collision.gameObject.layer;
         if ((colMask & enemyMask) != 0)
@@ -26,39 +26,44 @@ public class Weapon : MonoBehaviour
             if (enemy != null)
             {
                 enemy.Collapse();
-                Destroy();
+                Terminate();
             }
         }
         else if ((colMask & groundMask) != 0)
         {
             // 땅에 닿으면 불이 식는다는 컨셉
-            Destroy();
+            Terminate();
         }
     }
 
     public void Reset()
     {
-        rb.isKinematic = true;
-        rb.Sleep();
-        isDestroyed = false;
+        isTerminated = false;
     }
 
     public void Launch(Vector3 direction, float power)
     {
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        gameObject.SetActive(false);
+        gameObject.SetActive(true);
+
+        rb.useGravity = true;
         rb.isKinematic = false;
-        rb.WakeUp();
         rb.AddForce(direction * power, ForceMode.Impulse);
     }
 
-    private void Destroy()
+    private void Terminate()
     {
-        if (isDestroyed) return;
-        isDestroyed = true;
+        if (isTerminated) return;
+        isTerminated = true;
 
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+
+        rb.useGravity = false;
         rb.isKinematic = true;
-        rb.Sleep();
         OnDestroyed?.Invoke(this);
     }
 }

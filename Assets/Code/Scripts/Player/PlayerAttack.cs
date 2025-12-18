@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
@@ -11,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Component")]
     [SerializeField] GameObject[] weaponPrefabs;
     [SerializeField] Transform attackProjectilePoint; // 투사체 애니메이션 따라감
+    [SerializeField] TMP_Text tmp_bullet;
     Animator animator;
 
     [Header("Action")]
@@ -22,8 +24,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float attackPower = 50f;
     [SerializeField] int defaultCapacity = 5;
     [SerializeField] int maxSize = 20;
+    [SerializeField] int maxWeaponCount = 15;
 
     [Header("Calculation")]
+    int currentWeaponCount;
     Transform currentWeapon;
     bool isAttacking = false;
     int weaponIdx = 0;
@@ -32,6 +36,9 @@ public class PlayerAttack : MonoBehaviour
 
     void Awake()
     {
+        currentWeaponCount = maxWeaponCount;
+        SetCurrentBulletUI();
+
         attackAction = InputSystem.actions.FindAction("Attack");
         prevWeaponAction = InputSystem.actions.FindAction("PrevWeapon");
         nextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
@@ -53,6 +60,11 @@ public class PlayerAttack : MonoBehaviour
                 maxSize: maxSize
             );
         }
+    }
+
+    private void SetCurrentBulletUI()
+    {
+        tmp_bullet.text = currentWeaponCount + " / " + maxWeaponCount;
     }
 
     void OnEnable()
@@ -150,6 +162,7 @@ public class PlayerAttack : MonoBehaviour
     void OnAttack(InputAction.CallbackContext context)
     {
         if (isAttacking) return;
+        if (currentWeaponCount == 0) return;
         isAttacking = true;
         currentWeapon = GetWeapon(weaponIdx, attackProjectilePoint.position, attackProjectilePoint.rotation, attackProjectilePoint).transform;
         animator.Play("Attack");
@@ -157,14 +170,23 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttackEnd()
     {
-        isAttacking = false;
+        currentWeaponCount--;
+        SetCurrentBulletUI();
 
         Transform cam = Camera.main.transform;
         Vector3 camUpperForward = (cam.forward + cam.up).normalized;
         Debug.DrawRay(attackProjectilePoint.position, camUpperForward * 10f, Color.red, 2f);
 
+        // 그냥 맨땅에서 만들어서 던지면 덜덜거림 없음
+        // GameObject test = Instantiate(weaponPrefabs[1]);
+        // test.transform.position = attackProjectilePoint.position;
+        // test.transform.rotation = Quaternion.LookRotation(camUpperForward);
+        // test.GetComponent<Rigidbody>().linearVelocity = camUpperForward * 10f;
+
         currentWeapon.parent = null;
         currentWeapon.GetComponent<Weapon>().Launch(camUpperForward, attackPower);
         currentWeapon = null;
+
+        isAttacking = false;
     }
 }

@@ -9,10 +9,20 @@ public class Weapon : MonoBehaviour
     public event Action<Weapon> OnDestroyed;
     Rigidbody rb;
     bool isTerminated = false;
+    Transform currnetFollow;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
+    {
+        if (currnetFollow)
+        {
+            rb.MovePosition(currnetFollow.position);
+            rb.MoveRotation(currnetFollow.rotation);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -36,21 +46,19 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetWeapon(Transform follow)
     {
+        currnetFollow = follow;
         isTerminated = false;
+        rb.isKinematic = true;
     }
 
     public void Launch(Vector3 direction, float power)
     {
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-
-        gameObject.SetActive(false);
-        gameObject.SetActive(true);
-
-        rb.useGravity = true;
         rb.isKinematic = false;
+        ResetVelocity();
+
+        currnetFollow = null;
         rb.AddForce(direction * power, ForceMode.Impulse);
     }
 
@@ -59,11 +67,15 @@ public class Weapon : MonoBehaviour
         if (isTerminated) return;
         isTerminated = true;
 
+        ResetVelocity();
+        rb.isKinematic = true;
+
+        OnDestroyed?.Invoke(this);
+    }
+
+    private void ResetVelocity()
+    {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-
-        rb.useGravity = false;
-        rb.isKinematic = true;
-        OnDestroyed?.Invoke(this);
     }
 }

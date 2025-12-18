@@ -153,9 +153,8 @@ public class PlayerAttack : MonoBehaviour
         }
 
         Weapon weapon = weaponPools[weaponIndex].Get();
-        weapon.transform.SetParent(parent);
         weapon.transform.SetPositionAndRotation(position, rotation);
-        weapon.Reset();
+        weapon.ResetWeapon(attackProjectilePoint);
         return weapon;
     }
 
@@ -177,13 +176,6 @@ public class PlayerAttack : MonoBehaviour
         Vector3 camUpperForward = (cam.forward + cam.up).normalized;
         Debug.DrawRay(attackProjectilePoint.position, camUpperForward * 10f, Color.red, 2f);
 
-        // 그냥 맨땅에서 만들어서 던지면 덜덜거림 없음
-        // GameObject test = Instantiate(weaponPrefabs[1]);
-        // test.transform.position = attackProjectilePoint.position;
-        // test.transform.rotation = Quaternion.LookRotation(camUpperForward);
-        // test.GetComponent<Rigidbody>().linearVelocity = camUpperForward * 10f;
-
-        currentWeapon.parent = null;
         currentWeapon.GetComponent<Weapon>().Launch(camUpperForward, attackPower);
         currentWeapon = null;
 

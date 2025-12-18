@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -8,23 +9,26 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
 
     [Header("Component")]
-    [SerializeField] GameObject weaponPrefab;
+    [SerializeField] GameObject[] weaponPrefabs;
     [SerializeField] Transform attackProjectilePoint; // 투사체 애니메이션 따라감
     Animator animator;
+
+    [Header("Action")]
     InputAction attackAction;
+    InputAction prevWeaponAction;
+    InputAction nextWeaponAction;
 
     [Header("Parameter")]
     [SerializeField] float attackPower = 50f;
+    [SerializeField] int defaultCapacity = 5;
+    [SerializeField] int maxSize = 20;
 
     [Header("Calculation")]
     Transform currentWeapon;
     bool isAttacking = false;
-
-    [Header("Debug")]
-    [SerializeField] GameObject[] weaponList;
-    InputAction prevWeaponAction;
-    InputAction nextWeaponAction;
     int weaponIdx = 0;
+
+    public ObjectPool<Weapon>[] weaponPools { get; private set; }
 
     void Awake()
     {
@@ -32,6 +36,23 @@ public class PlayerAttack : MonoBehaviour
         prevWeaponAction = InputSystem.actions.FindAction("PrevWeapon");
         nextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
         animator = GetComponent<Animator>();
+
+        // 무기 풀 초기화
+        weaponPools = new ObjectPool<Weapon>[weaponPrefabs.Length];
+
+        for (int i = 0; i < weaponPrefabs.Length; i++)
+        {
+            int poolIndex = i; // Closure를 피하기 위해 로컬 변수에 할당
+            weaponPools[i] = new ObjectPool<Weapon>(
+                createFunc: () => OnCreatePoolWeapon(poolIndex),
+                actionOnGet: OnGetWeaponFromPool,
+                actionOnRelease: OnReleaseWeaponToPool,
+                actionOnDestroy: OnDestroyPoolWeapon,
+                collectionCheck: true,
+                defaultCapacity: defaultCapacity,
+                maxSize: maxSize
+            );
+        }
     }
 
     void OnEnable()
@@ -43,7 +64,6 @@ public class PlayerAttack : MonoBehaviour
         nextWeaponAction.Enable();
         prevWeaponAction.performed += PrevWeapon;
         nextWeaponAction.performed += NextWeapon;
-
     }
 
     void OnDisable()
@@ -57,41 +77,81 @@ public class PlayerAttack : MonoBehaviour
         nextWeaponAction.performed -= NextWeapon;
     }
 
-    private void PrevWeapon(InputAction.CallbackContext ctx)
+    void PrevWeapon(InputAction.CallbackContext context)
     {
         weaponIdx--;
-        weaponPrefab = weaponList[(weaponIdx + weaponList.Length) % weaponList.Length];
-        SetDummyWeapon();
+        weaponIdx = (weaponIdx + weaponPrefabs.Length) % weaponPrefabs.Length;
     }
 
-    private void NextWeapon(InputAction.CallbackContext ctx)
+    void NextWeapon(InputAction.CallbackContext context)
     {
         weaponIdx++;
-        weaponPrefab = weaponList[(weaponIdx + weaponList.Length) % weaponList.Length];
-        SetDummyWeapon();
+        weaponIdx = weaponIdx % weaponPrefabs.Length;
     }
 
-    private void SetDummyWeapon()
+    private Weapon OnCreatePoolWeapon(int poolIndex)
     {
-        foreach (Transform child in attackProjectilePoint)
+        Weapon weapon = Instantiate(weaponPrefabs[poolIndex]).GetComponent<Weapon>();
+        weapon.OnDestroyed += OnWeaponDestroyed;
+        return weapon;
+    }
+
+    private void OnWeaponDestroyed(Weapon weapon)
+    {
+        // 적절한 풀에 반환하기 위해 weaponPrefabs와 비교
+        for (int i = 0; i < weaponPrefabs.Length; i++)
         {
-            Destroy(child.gameObject);
+            if (weapon.gameObject.name.Contains(weaponPrefabs[i].name))
+            {
+                weaponPools[i].Release(weapon);
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 무기를 풀에서 가져올 때 호출됨
+    /// </summary>
+    private void OnGetWeaponFromPool(Weapon weapon)
+    {
+        weapon.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 무기가 파괴될 때 Release로 호출됨
+    /// </summary>
+    private void OnReleaseWeaponToPool(Weapon weapon)
+    {
+        weapon.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyPoolWeapon(Weapon weapon)
+    {
+        if (weapon == null) return;
+        weapon.OnDestroyed -= OnWeaponDestroyed;
+        Destroy(weapon.gameObject);
+    }
+
+    public Weapon GetWeapon(int weaponIndex, Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        if (weaponIndex < 0 || weaponIndex >= weaponPools.Length)
+        {
+            Debug.LogError($"Invalid weapon index: {weaponIndex}");
+            return null;
         }
 
-        Instantiate(weaponPrefab, attackProjectilePoint);
-    }
-
-    [Button]
-    public void SpawnWeapon()
-    {
-        currentWeapon = Instantiate(weaponPrefab, attackProjectilePoint.position, attackProjectilePoint.rotation, attackProjectilePoint.transform).transform;
+        Weapon weapon = weaponPools[weaponIndex].Get();
+        weapon.transform.SetParent(parent);
+        weapon.transform.SetPositionAndRotation(position, rotation);
+        weapon.Reset();
+        return weapon;
     }
 
     void OnAttack(InputAction.CallbackContext context)
     {
         if (isAttacking) return;
         isAttacking = true;
-        currentWeapon = Instantiate(weaponPrefab, attackProjectilePoint.position, attackProjectilePoint.rotation, attackProjectilePoint.transform).transform;
+        currentWeapon = GetWeapon(weaponIdx, attackProjectilePoint.position, attackProjectilePoint.rotation, attackProjectilePoint).transform;
         animator.Play("Attack");
     }
 
@@ -104,9 +164,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.DrawRay(attackProjectilePoint.position, camUpperForward * 10f, Color.red, 2f);
 
         currentWeapon.parent = null;
-        Rigidbody weaponRB = currentWeapon.GetComponent<Rigidbody>();
-        weaponRB.isKinematic = false;
-        weaponRB.AddForce(camUpperForward * attackPower, ForceMode.Impulse);
+        currentWeapon.GetComponent<Weapon>().Launch(camUpperForward, attackPower);
         currentWeapon = null;
     }
 }

@@ -3,7 +3,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 
-public class PlayerAttack : MonoBehaviour
+public interface IRechargeBullet
+{
+    public void RechargeBullet();
+}
+
+public class PlayerAttack : MonoBehaviour, IRechargeBullet
 {
     /// <summary>
     /// Attack Origin에서 생성된 후에 follow origin을 따라서 animation
@@ -44,6 +49,16 @@ public class PlayerAttack : MonoBehaviour
         nextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
         animator = GetComponent<Animator>();
 
+        InitWeaponPools();
+    }
+
+    private void SetCurrentBulletUI()
+    {
+        tmp_bullet.text = currentWeaponCount + " / " + maxWeaponCount;
+    }
+
+    private void InitWeaponPools()
+    {
         // 무기 풀 초기화
         weaponPools = new ObjectPool<Weapon>[weaponPrefabs.Length];
 
@@ -62,11 +77,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void SetCurrentBulletUI()
-    {
-        tmp_bullet.text = currentWeaponCount + " / " + maxWeaponCount;
-    }
-
+    #region Enable Disable
     void OnEnable()
     {
         attackAction.Enable();
@@ -100,7 +111,9 @@ public class PlayerAttack : MonoBehaviour
         weaponIdx++;
         weaponIdx = weaponIdx % weaponPrefabs.Length;
     }
+    #endregion
 
+    #region Object Pool
     private Weapon OnCreatePoolWeapon(int poolIndex)
     {
         Weapon weapon = Instantiate(weaponPrefabs[poolIndex]).GetComponent<Weapon>();
@@ -157,7 +170,9 @@ public class PlayerAttack : MonoBehaviour
         weapon.ResetWeapon(attackProjectilePoint);
         return weapon;
     }
+    #endregion
 
+    #region OnAttack
     void OnAttack(InputAction.CallbackContext context)
     {
         if (isAttacking) return;
@@ -180,5 +195,12 @@ public class PlayerAttack : MonoBehaviour
         currentWeapon = null;
 
         isAttacking = false;
+    }
+    #endregion
+
+    public void RechargeBullet()
+    {
+        currentWeaponCount = maxWeaponCount;
+        SetCurrentBulletUI();
     }
 }

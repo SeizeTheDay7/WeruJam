@@ -8,14 +8,14 @@ public class Player : MonoBehaviour
     public PlayerAttack attack { get; private set; }
 
 
-    void Awake()
-    {
-        move = GetComponent<PlayerMove>();
-        attack = GetComponent<PlayerAttack>();
-    }
+    // void Awake()
+    // {
+    //     move = GetComponent<PlayerMove>();
+    //     attack = GetComponent<PlayerAttack>();
+    // }
 
-    void Update()
-    {
+    // void Update()
+    // {
 
-    }
+    // }
 }

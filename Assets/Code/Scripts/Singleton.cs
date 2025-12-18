@@ -31,7 +31,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
         _instance = this as T;
         OnAwake();
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
     }
 
     protected void OnApplicationQuit()

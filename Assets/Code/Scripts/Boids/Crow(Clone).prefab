@@ -49,9 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoidMove
   rayLength: 2
-  speed: 5
+  speed: 7.5
+  turnAceel: 1
   avoidAccel: 2.5
-  alignAccel: 0
+  alignAccel: 1
+  followAccel: 75
 --- !u!135 &7248090739819023673
 SphereCollider:
   m_ObjectHideFlags: 0

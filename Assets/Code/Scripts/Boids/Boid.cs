@@ -6,10 +6,12 @@ public class Boid : MonoBehaviour
 
     [SerializeField] float rayLength = 2f;
     [SerializeField] float speed = 5f;
+    [SerializeField] float turnAceel = 1f;
     [SerializeField] float avoidAccel = 10f;
     [SerializeField] float alignAccel = 1f;
+    [SerializeField] float followAccel = 1f;
+    Transform target;
 
-    List<Boid> allBoids;
     HashSet<Boid> collidingBoids = new();
 
     void OnTriggerEnter(Collider other)
@@ -30,23 +32,31 @@ public class Boid : MonoBehaviour
         }
     }
 
-    public void Init(List<Boid> boids)
+    public void Init(Transform target)
     {
-        allBoids = boids;
+        this.target = target;
     }
 
-    public void UpdateBoid(Vector3 flockDir)
+    public void UpdateBoid()
     {
         Vector3 headDir = transform.forward;
         Vector3 avoidanceSum = Avoidance();
+        Vector3 alignmentSum = Alignment();
+        Vector3 followTargetSum = FollowTarget();
 
-        Vector3 targetDir = (headDir + avoidanceSum * avoidAccel + flockDir * alignAccel).normalized;
-        if (targetDir != Vector3.zero)
-            transform.forward = Vector3.Slerp(transform.forward, targetDir, Time.deltaTime * avoidAccel);
+        Vector3 finalDir = (headDir
+                            + avoidanceSum * avoidAccel
+                            + alignmentSum * alignAccel
+                            + followTargetSum * followAccel).normalized;
+        if (finalDir != Vector3.zero)
+            transform.forward = Vector3.Slerp(transform.forward, finalDir, Time.deltaTime * turnAceel);
 
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
+    /// <summary>
+    /// 다른 놈 만났을 때 가까워지면 회피
+    /// </summary>
     private Vector3 Avoidance()
     {
         Vector3 avoidanceSum = Vector3.zero;
@@ -74,6 +84,49 @@ public class Boid : MonoBehaviour
         }
 
         return avoidanceSum;
+    }
+
+    /// <summary>
+    /// 다른 놈 만났을 때 거리 상관 없이 정렬 시작
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 Alignment()
+    {
+        Vector3 alignmentSum = Vector3.zero;
+
+        foreach (var boid in collidingBoids)
+        {
+            if (boid == null) continue;
+
+            Vector3 toOther = boid.transform.position - transform.position;
+            float dist = toOther.magnitude;
+            if (dist < 0.01f) continue; // 너무 가까우면 무시 (계산 오류 방지)
+
+            Vector3 dirToOther = toOther / dist;
+            float inFront = Vector3.Dot(transform.forward, dirToOther);
+
+            // 정면에 있어야 정렬
+            if (inFront > 0f)
+            {
+                alignmentSum += boid.transform.forward;
+            }
+        }
+
+        alignmentSum.Normalize();
+        return alignmentSum;
+    }
+
+    /// <summary>
+    /// 타겟에 가까울수록 타겟을 쫓아가려고 해
+    /// </summary>
+    private Vector3 FollowTarget()
+    {
+        Vector3 toTarget = target.position - transform.position;
+        float dist = toTarget.magnitude;
+        if (dist < 0.01f) return Vector3.zero; // 너무 가까우면 무시 (계산 오류 방지)
+
+        Vector3 targetFollowSum = toTarget.normalized / dist;
+        return targetFollowSum;
     }
 
 }

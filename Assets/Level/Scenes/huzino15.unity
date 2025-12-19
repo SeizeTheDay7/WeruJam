@@ -898,8 +898,7 @@ Transform:
   m_LocalPosition: {x: -22.7, y: 22.6, z: -50.8}
   m_LocalScale: {x: 72.30577, y: 72.30577, z: 72.30577}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2059402107}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1113628555
@@ -917,6 +916,8 @@ MonoBehaviour:
   spawnerCube: {fileID: 1113628550}
   crowPrefab: {fileID: 4354551664611672739, guid: 38ad8dc760495344281ebeba28fbfc78, type: 3}
   crowAmount: 20
+  target: {fileID: 1280819680}
+  spline: {fileID: 2059402108}
 --- !u!1 &1173987565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1044,37 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
+--- !u!1 &1280819679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1280819680}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1280819680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280819679}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.85227, y: 0, z: -45.49134}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397784326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,6 +1679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2059402107}
   - component: {fileID: 2059402108}
+  - component: {fileID: 2059402109}
   m_Layer: 0
   m_Name: Spline
   m_TagString: Untagged
@@ -1662,12 +1695,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059402106}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.65234, y: 0.65234, z: 0.65234}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.4, y: 22.6, z: 12.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1113628554}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2059402108
 MonoBehaviour:
@@ -1698,17 +1731,17 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: -0.5
+        x: -23.583973
         y: 0
         z: 0
       TangentIn:
         x: -0
         y: -0
-        z: -0.27614236
+        z: -13.025068
       TangentOut:
         x: 0
         y: 0
-        z: 0.27614236
+        z: 13.025068
       Rotation:
         value:
           x: 0
@@ -1716,17 +1749,17 @@ MonoBehaviour:
           z: 0
           w: 1
     - Position:
-        x: -0.000000029802322
+        x: -0.0000014057143
         y: 0
-        z: 0.49999997
+        z: 23.583971
       TangentIn:
         x: -0
         y: -0
-        z: -0.27614236
+        z: -13.025068
       TangentOut:
         x: 0
         y: 0
-        z: 0.27614236
+        z: 13.025068
       Rotation:
         value:
           x: 0
@@ -1734,17 +1767,17 @@ MonoBehaviour:
           z: 0
           w: 0.70710677
     - Position:
-        x: 0.49999988
+        x: 23.583967
         y: 0
         z: 0
       TangentIn:
         x: -0
         y: -0
-        z: -0.27614236
+        z: -13.025068
       TangentOut:
         x: 0
         y: 0
-        z: 0.27614236
+        z: 13.025068
       Rotation:
         value:
           x: 0
@@ -1752,17 +1785,17 @@ MonoBehaviour:
           z: 0
           w: 0
     - Position:
-        x: -0.00000008940697
+        x: -0.000004217143
         y: 0
-        z: -0.4999999
+        z: -23.58397
       TangentIn:
         x: -0
         y: -0
-        z: -0.27614236
+        z: -13.025068
       TangentOut:
         x: 0
         y: 0
-        z: 0.27614236
+        z: 13.025068
       Rotation:
         value:
           x: 0
@@ -1789,6 +1822,19 @@ MonoBehaviour:
       m_Data: []
   m_Knots:
     m_KnotsLink: []
+--- !u!114 &2059402109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059402106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad88b3fa989ee7843ba380ef9cb50ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SplineScaleBaker
+  splineContainer: {fileID: 2059402108}
 --- !u!4 &1604655529167030998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1604655528857971514, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
@@ -1989,3 +2035,5 @@ SceneRoots:
   - {fileID: 381868760}
   - {fileID: 2004586597}
   - {fileID: 1113628554}
+  - {fileID: 1280819680}
+  - {fileID: 2059402107}

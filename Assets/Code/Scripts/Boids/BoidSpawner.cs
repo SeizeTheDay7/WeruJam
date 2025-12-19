@@ -1,12 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Splines;
 
 public class BoidSpawner : MonoBehaviour
 {
     [SerializeField] GameObject spawnerCube;
     [SerializeField] GameObject crowPrefab;
     [SerializeField] int crowAmount = 10;
+    [SerializeField] Transform target;
+    [SerializeField] SplineContainer spline;
+    [SerializeField] float spinSpeed = 0.25f;
 
+    float time;
     List<Boid> boids;
 
     Vector2 XLimit;
@@ -28,7 +33,6 @@ public class BoidSpawner : MonoBehaviour
 
     void Start()
     {
-
         for (int i = 0; i < crowAmount; i++)
         {
             Vector3 spawnPosition = new Vector3(
@@ -37,33 +41,36 @@ public class BoidSpawner : MonoBehaviour
                 Random.Range(ZLimit.x, ZLimit.y)
             );
 
-            Quaternion spawnRotation = Quaternion.Euler(
-                0f,
-                Random.Range(0f, 360f),
-                0f
-            );
-            // Quaternion spawnRotation = Quaternion.identity;
+            // Quaternion spawnRotation = Quaternion.Euler(
+            //     0f,
+            //     Random.Range(0f, 360f),
+            //     0f
+            // );
+            Quaternion spawnRotation = Quaternion.identity;
 
             var boid = Instantiate(crowPrefab, spawnPosition, spawnRotation).GetComponent<Boid>();
             boids.Add(boid);
-            boid.Init(boids);
+            boid.Init(target);
         }
     }
 
     void Update()
     {
-        Vector3 flockDir = Vector3.zero;
-        foreach (var boid in boids)
-        {
-            flockDir += boid.transform.forward;
-        }
-        flockDir.Normalize();
+        // Vector3 flockDir = Vector3.zero;
+        // foreach (var boid in boids)
+        // {
+        //     flockDir += boid.transform.forward;
+        // }
+        // flockDir.Normalize();
 
         foreach (var boid in boids)
         {
-            boid.UpdateBoid(flockDir);
-            BoundToBox(boid.transform);
+            boid.UpdateBoid();
+            // BoundToBox(boid.transform);
         }
+
+        time += Time.deltaTime;
+        target.position = spline.transform.position + (Vector3)SplineUtility.EvaluatePosition(spline.Spline, (time * spinSpeed) % 1f);
     }
 
     private void BoundToBox(Transform boid)

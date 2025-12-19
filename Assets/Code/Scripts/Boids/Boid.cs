@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Boid : MonoBehaviour
 {
-
     [SerializeField] float rayLength = 2f;
     [SerializeField] float speed = 5f;
     [SerializeField] float turnAceel = 1f;
@@ -11,8 +10,30 @@ public class Boid : MonoBehaviour
     [SerializeField] float alignAccel = 1f;
     [SerializeField] float followAccel = 1f;
     Transform target;
+    AudioSource audioSource;
+    float nextCryTime = 0;
+    [SerializeField] float shortestCooltime = 2f;
+    [SerializeField] float longestCooltime = 20f;
+    [SerializeField] AudioClip[] crySounds;
 
     HashSet<Boid> collidingBoids = new();
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        nextCryTime = Time.time + Random.Range(shortestCooltime, longestCooltime);
+    }
+
+    public void TryCry()
+    {
+        if (Time.time >= nextCryTime)
+        {
+            audioSource.clip = crySounds[Random.Range(0, crySounds.Length)];
+            audioSource.Play();
+            float cooltime = Random.Range(shortestCooltime, longestCooltime);
+            nextCryTime = Time.time + cooltime;
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {

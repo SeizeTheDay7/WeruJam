@@ -24,6 +24,12 @@ public class Boid : MonoBehaviour
         nextCryTime = Time.time + Random.Range(shortestCooltime, longestCooltime);
     }
 
+    void Start()
+    {
+        float offset = Random.Range(0f, 1f);
+        GetComponent<Animator>().Play("Fly", 0, offset);
+    }
+
     public void TryCry()
     {
         if (Time.time >= nextCryTime)

@@ -94,7 +94,7 @@ public class PlayerMove : MonoBehaviour
 
     private void SyncPlayerBody()
     {
-        Quaternion vcamRotation = Quaternion.Euler(0f, player_vcam.transform.eulerAngles.y + 90f, 0f);
+        Quaternion vcamRotation = Quaternion.Euler(0f, player_vcam.transform.eulerAngles.y, 0f);
         playerBody.rotation = vcamRotation;
     }
 

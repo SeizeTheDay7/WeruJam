@@ -16,18 +16,21 @@ public class Weapon : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (currnetFollow)
         {
-            rb.MovePosition(currnetFollow.position);
-            rb.MoveRotation(currnetFollow.rotation);
+            // rb.MovePosition(currnetFollow.position);
+            // rb.MoveRotation(currnetFollow.rotation);
+            transform.position = currnetFollow.position;
+            transform.rotation = currnetFollow.rotation;
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (isTerminated) return;
+        print("Collisoin name : " + collision.gameObject.name);
 
         int colMask = 1 << collision.gameObject.layer;
         if ((colMask & enemyMask) != 0)

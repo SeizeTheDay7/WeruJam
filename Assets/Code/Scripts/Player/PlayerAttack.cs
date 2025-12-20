@@ -2,205 +2,143 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
+using DG.Tweening;
+using System.Collections;
 
 public interface IRechargeBullet
 {
     public void RechargeBullet();
 }
 
-public class PlayerAttack : MonoBehaviour, IRechargeBullet
+public enum AttackPhase
+{
+    NotArmed,
+    Grabbing,
+    Holding,
+    Throwing
+}
+
+public class PlayerAttack : MonoBehaviour
 {
     /// <summary>
     /// Attack Origin에서 생성된 후에 follow origin을 따라서 animation
     /// </summary>
 
     [Header("Component")]
-    [SerializeField] GameObject[] weaponPrefabs;
-    [SerializeField] Transform attackProjectilePoint; // 투사체 애니메이션 따라감
-    [SerializeField] TMP_Text tmp_bullet;
+    [SerializeField] Transform hand_right; // 들고 있는 손, weapon의 부모가 된다
+    [SerializeField] Transform hand_right_pinpoint; // 들고 있는 손의 특정 지점, weapon의 local position의 ref가 된다.
+    [SerializeField] DummyWeaponBox dummyBox;
+    [SerializeField] WeaponPool weaponPool;
     Animator animator;
+    Transform cam;
 
     [Header("Action")]
     InputAction attackAction;
-    InputAction prevWeaponAction;
-    InputAction nextWeaponAction;
 
     [Header("Parameter")]
     [SerializeField] float attackPower = 50f;
-    [SerializeField] int defaultCapacity = 5;
-    [SerializeField] int maxSize = 20;
-    [SerializeField] int maxWeaponCount = 15;
 
     [Header("Calculation")]
-    int currentWeaponCount;
-    Transform currentWeapon;
-    bool isAttacking = false;
-    int weaponIdx = 0;
-
-    public ObjectPool<Weapon>[] weaponPools { get; private set; }
+    Weapon currentWeapon;
+    AttackPhase phase;
 
     void Awake()
     {
-        currentWeaponCount = maxWeaponCount;
-        SetCurrentBulletUI();
-
+        phase = AttackPhase.NotArmed;
+        cam = Camera.main.transform;
         attackAction = InputSystem.actions.FindAction("Attack");
-        prevWeaponAction = InputSystem.actions.FindAction("PrevWeapon");
-        nextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
         animator = GetComponent<Animator>();
-
-        InitWeaponPools();
     }
 
-    private void SetCurrentBulletUI()
-    {
-        tmp_bullet.text = currentWeaponCount + " / " + maxWeaponCount;
-    }
-
-    private void InitWeaponPools()
-    {
-        // 무기 풀 초기화
-        weaponPools = new ObjectPool<Weapon>[weaponPrefabs.Length];
-
-        for (int i = 0; i < weaponPrefabs.Length; i++)
-        {
-            int poolIndex = i; // Closure를 피하기 위해 로컬 변수에 할당
-            weaponPools[i] = new ObjectPool<Weapon>(
-                createFunc: () => OnCreatePoolWeapon(poolIndex),
-                actionOnGet: OnGetWeaponFromPool,
-                actionOnRelease: OnReleaseWeaponToPool,
-                actionOnDestroy: OnDestroyPoolWeapon,
-                collectionCheck: true,
-                defaultCapacity: defaultCapacity,
-                maxSize: maxSize
-            );
-        }
-    }
-
-    #region Enable Disable
     void OnEnable()
     {
         attackAction.Enable();
         attackAction.performed += OnAttack;
-
-        prevWeaponAction.Enable();
-        nextWeaponAction.Enable();
-        prevWeaponAction.performed += PrevWeapon;
-        nextWeaponAction.performed += NextWeapon;
     }
 
     void OnDisable()
     {
         attackAction.Disable();
         attackAction.performed -= OnAttack;
-
-        prevWeaponAction.Disable();
-        nextWeaponAction.Disable();
-        prevWeaponAction.performed -= PrevWeapon;
-        nextWeaponAction.performed -= NextWeapon;
     }
 
-    void PrevWeapon(InputAction.CallbackContext context)
-    {
-        weaponIdx--;
-        weaponIdx = (weaponIdx + weaponPrefabs.Length) % weaponPrefabs.Length;
-    }
-
-    void NextWeapon(InputAction.CallbackContext context)
-    {
-        weaponIdx++;
-        weaponIdx = weaponIdx % weaponPrefabs.Length;
-    }
-    #endregion
-
-    #region Object Pool
-    private Weapon OnCreatePoolWeapon(int poolIndex)
-    {
-        Weapon weapon = Instantiate(weaponPrefabs[poolIndex]).GetComponent<Weapon>();
-        weapon.OnDestroyed += OnWeaponDestroyed;
-        return weapon;
-    }
-
-    private void OnWeaponDestroyed(Weapon weapon)
-    {
-        // 적절한 풀에 반환하기 위해 weaponPrefabs와 비교
-        for (int i = 0; i < weaponPrefabs.Length; i++)
-        {
-            if (weapon.gameObject.name.Contains(weaponPrefabs[i].name))
-            {
-                weaponPools[i].Release(weapon);
-                return;
-            }
-        }
-    }
-
-    /// <summary>
-    /// 무기를 풀에서 가져올 때 호출됨
-    /// </summary>
-    private void OnGetWeaponFromPool(Weapon weapon)
-    {
-        weapon.gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// 무기가 파괴될 때 Release로 호출됨
-    /// </summary>
-    private void OnReleaseWeaponToPool(Weapon weapon)
-    {
-        weapon.gameObject.SetActive(false);
-    }
-
-    private void OnDestroyPoolWeapon(Weapon weapon)
-    {
-        if (weapon == null) return;
-        weapon.OnDestroyed -= OnWeaponDestroyed;
-        Destroy(weapon.gameObject);
-    }
-
-    public Weapon GetWeapon(int weaponIndex, Vector3 position, Quaternion rotation, Transform parent = null)
-    {
-        if (weaponIndex < 0 || weaponIndex >= weaponPools.Length)
-        {
-            Debug.LogError($"Invalid weapon index: {weaponIndex}");
-            return null;
-        }
-
-        Weapon weapon = weaponPools[weaponIndex].Get();
-        weapon.transform.SetPositionAndRotation(position, rotation);
-        weapon.ResetWeapon(attackProjectilePoint);
-        return weapon;
-    }
-    #endregion
-
-    #region OnAttack
+    #region Attack Event
     void OnAttack(InputAction.CallbackContext context)
     {
-        if (isAttacking) return;
-        if (currentWeaponCount == 0) return;
-        isAttacking = true;
-        currentWeapon = GetWeapon(weaponIdx, attackProjectilePoint.position, attackProjectilePoint.rotation, attackProjectilePoint).transform;
+        switch (phase)
+        {
+            case AttackPhase.NotArmed:
+                StartGrab();
+                break;
+            case AttackPhase.Grabbing: // 집고있는 도중, 공격 불가
+                break;
+            case AttackPhase.Holding: // 집은 상태, 공격 가능
+                StartThrow();
+                break;
+            case AttackPhase.Throwing:
+                break;
+        }
+    }
+
+    private void StartGrab()
+    {
+        if (dummyBox.isEmpty()) return;
+        animator.Play("GrabWeapon");
+        phase = AttackPhase.Grabbing;
+        StartCoroutine(CoStartHold(1.25f));
+    }
+
+    /// <summary>
+    /// GrabWeapon 애니메이션 이벤트가 호출
+    /// </summary>
+    private void StartHold()
+    {
+        phase = AttackPhase.Holding;
+        // TODO :: 십자선 UI 등장
+    }
+
+    /// <summary>
+    /// Holding 상태에서 공격 누르면 호출됨
+    /// </summary>
+    private void StartThrow()
+    {
+        phase = AttackPhase.Throwing;
         animator.Play("Attack");
+    }
+
+    /// <summary>
+    /// 보여주기용 성냥 하나 끄고, pool에서 가져온 성냥을 그 위치에서부터 animation
+    /// </summary>
+    void OnGrabWeapon()
+    {
+        dummyBox.DisableDummyWeapon();
+        currentWeapon = weaponPool.Get();
+        currentWeapon.ResetWeapon(hand_right_pinpoint);
+    }
+
+    private IEnumerator CoStartHold(float animTime)
+    {
+        yield return new WaitForSeconds(animTime);
+        StartHold();
+    }
+
+    // TODO :: 나중에 shader 들어오면 추가
+    void OnLightMatch()
+    {
+        // currentWeapon.LightUp();
     }
 
     void OnAttackEnd()
     {
-        currentWeaponCount--;
-        SetCurrentBulletUI();
-
-        Transform cam = Camera.main.transform;
         Vector3 camUpperForward = (cam.forward + cam.up).normalized;
-        Debug.DrawRay(attackProjectilePoint.position, camUpperForward * 10f, Color.red, 2f);
 
-        currentWeapon.GetComponent<Weapon>().Launch(camUpperForward, attackPower);
+
+        currentWeapon.Launch(camUpperForward, attackPower);
+        currentWeapon.transform.SetParent(null);
         currentWeapon = null;
 
-        isAttacking = false;
+        // TODO :: 십자선 UI 해제
+        phase = AttackPhase.NotArmed;
     }
     #endregion
-
-    public void RechargeBullet()
-    {
-        currentWeaponCount = maxWeaponCount;
-        SetCurrentBulletUI();
-    }
 }

@@ -13,6 +13,7 @@ public enum IMove
 public class PlayerMove : MonoBehaviour
 {
     [Header("Component")]
+    [SerializeField] Transform playerBody;
     [SerializeField] CinemachineCamera player_vcam;
     [SerializeField] private CinemachineImpulseSource impulse_walk;
     [SerializeField] private CinemachineImpulseSource impulse_run;
@@ -80,6 +81,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        SyncPlayerBody();
         GetInput();
         AddCameraMove(direction);
         AddGravity();
@@ -88,6 +90,12 @@ public class PlayerMove : MonoBehaviour
         CollisionFlags flags = characterController.Move(direction * moveSpeed * Time.deltaTime);
         if ((flags & CollisionFlags.Above) != 0 && verticalVelocity > 0)
             verticalVelocity = 0f; // 천장에 닿았으면 속도 제거
+    }
+
+    private void SyncPlayerBody()
+    {
+        Quaternion vcamRotation = Quaternion.Euler(0f, player_vcam.transform.eulerAngles.y + 90f, 0f);
+        playerBody.rotation = vcamRotation;
     }
 
     private void GetInput()

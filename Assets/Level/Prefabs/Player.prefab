@@ -295,7 +295,6 @@ GameObject:
   - component: {fileID: 2319445856948971849}
   - component: {fileID: 8095035260915030106}
   - component: {fileID: 9120587461662776004}
-  - component: {fileID: 8454314573646174276}
   - component: {fileID: 4414550259468370884}
   - component: {fileID: 3536015542855371192}
   m_Layer: 0
@@ -359,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06706934035417f4f9ff76acb8b63104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBody: {fileID: 0}
   player_vcam: {fileID: 5178274682217083615}
   impulse_walk: {fileID: 8057614163190200865}
   impulse_run: {fileID: 8804811950007465132}
@@ -620,21 +620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fb49f09ff1fb145b7ebb14b45c86cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
---- !u!114 &8454314573646174276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5105935333527093679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76aeac1a354db024f93cf601ed7bc725, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  weaponPrefab: {fileID: 4463501753658771187, guid: 2250fd0317b350740b919f96831b4a40, type: 3}
-  attackProjectilePoint: {fileID: 7094454559537818233}
-  attackPower: 10
 --- !u!95 &4414550259468370884
 Animator:
   serializedVersion: 7

@@ -32,7 +32,6 @@ public class DummyWeaponBox : MonoBehaviour
     /// <summary>
     /// 공격 중엔 호출 못하게 PlayerAttack에서 막을 것
     /// </summary>
-    [Button]
     public void Recharge()
     {
         currentWeaponIdx = dummies.Length - 1;

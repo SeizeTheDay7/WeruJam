@@ -18,7 +18,7 @@ public enum AttackPhase
     Throwing
 }
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : MonoBehaviour, IRechargeBullet
 {
     /// <summary>
     /// Attack Origin에서 생성된 후에 follow origin을 따라서 animation
@@ -60,6 +60,11 @@ public class PlayerAttack : MonoBehaviour
     {
         attackAction.Disable();
         attackAction.performed -= OnAttack;
+    }
+
+    public void RechargeBullet()
+    {
+        dummyBox.Recharge();
     }
 
     #region Attack Event

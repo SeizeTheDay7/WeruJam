@@ -30,7 +30,6 @@ public class Weapon : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (isTerminated) return;
-        print("Collisoin name : " + collision.gameObject.name);
 
         int colMask = 1 << collision.gameObject.layer;
         if ((colMask & enemyMask) != 0)

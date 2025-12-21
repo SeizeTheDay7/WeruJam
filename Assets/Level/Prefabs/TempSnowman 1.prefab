@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3464736843452140249}
   - component: {fileID: 2317785464333299448}
   - component: {fileID: 1915307537005437191}
-  m_Layer: 0
+  - component: {fileID: -4692913882399380655}
+  m_Layer: 6
   m_Name: TempSnowman 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   agent: {fileID: 0}
   graphic: {fileID: 335295551674193127}
+  collapseAfter: 3
 --- !u!195 &1915307537005437191
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -59,7 +61,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1.4
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 1000
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -70,6 +72,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &-4692913882399380655
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970819761735063644}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.3
+  m_Height: 4.15
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.78, z: 0}
 --- !u!1 &5722542103877714873
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 335295551674193127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,9 +187,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7723957312339074987, guid: 4499b168d7c4d4b4587449c5efb054da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2517781954979513301, guid: 4499b168d7c4d4b4587449c5efb054da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -889650124829036229, guid: 4499b168d7c4d4b4587449c5efb054da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -259497677551865727, guid: 4499b168d7c4d4b4587449c5efb054da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4499b168d7c4d4b4587449c5efb054da, type: 3}
       propertyPath: m_Name
       value: sm_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4499b168d7c4d4b4587449c5efb054da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335468490384170268, guid: 4499b168d7c4d4b4587449c5efb054da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621027698043451315, guid: 4499b168d7c4d4b4587449c5efb054da, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

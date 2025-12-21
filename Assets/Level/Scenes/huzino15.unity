@@ -181,7 +181,11 @@ PrefabInstance:
       objectReference: {fileID: 2970819761735063644, guid: f12bd22c1ce13454194519d5d7f5be5c, type: 3}
     - target: {fileID: 3536015542855371192, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: spawnAmount
-      value: 3
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536015542855371192, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: spawnInterval
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 3536015542855371192, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: enemyPrefabs.Array.size
@@ -210,6 +214,10 @@ PrefabInstance:
     - target: {fileID: 5105935333527093679, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178274682217083615, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: Lens.FieldOfView
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -277,7 +285,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

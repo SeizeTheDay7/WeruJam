@@ -13,24 +13,35 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject[] enemyPrefabs;
 
-    [Header("Parameter")]
+    [Header("Parameter - Spawn")]
     [SerializeField] int spawnAmount = 8;
     [SerializeField] float spawnInterval = 3f;
+    [SerializeField] float mapMaxHeight = 90f;
+    [SerializeField] float checkRayLength = 100f;
+
+    [Header("Parameter - Performance")]
     [SerializeField] float followTargetInterval = 0.1f;
+    [SerializeField] float visibilityCheckInterval = 0.05f;
     [SerializeField] float navmeshSampleRadius = 5f;
 
     [Header("Calculation")]
-    [SerializeField] float mapMaxHeight = 90f;
-    [SerializeField] float checkRayLength = 100f;
-    int navmeshAreaMask = NavMesh.AllAreas;
     bool canUpdateTarget = true;
     bool canSpawn = true;
+    bool canCheckVisible = true;
+
+    int navmeshAreaMask = NavMesh.AllAreas;
     HashSet<Enemy> enemies = new(); // 현재 스폰된 눈사람들
     public ObjectPool<Enemy> enemyPool { get; private set; }
+
     Vector3 enemySpawnPosition;
+    Camera cam;
+    float cosThreshold;
 
     void Awake()
     {
+        cam = Camera.main;
+        cosThreshold = Mathf.Cos(90 * Mathf.Deg2Rad);
+
         enemyPool = new ObjectPool<Enemy>(
             createFunc: OnCreatePoolEnemy,
             actionOnGet: OnGetEnemyFromPool,
@@ -87,21 +98,9 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        if (canUpdateTarget) StartCoroutine(CoUpdateTarget());
         if (canSpawn) StartCoroutine(CoSpawn());
-    }
-
-    private IEnumerator CoUpdateTarget()
-    {
-        canUpdateTarget = false;
-        foreach (Enemy enemy in enemies)
-        {
-            if (enemy == null) continue;
-            if (enemy.agent.isStopped) continue;
-            enemy.SetTarget(player.transform);
-        }
-        yield return new WaitForSeconds(followTargetInterval);
-        canUpdateTarget = true;
+        if (canCheckVisible) StartCoroutine(CoCheckVisible());
+        if (canUpdateTarget) StartCoroutine(CoUpdateTarget());
     }
 
     private IEnumerator CoSpawn()
@@ -135,4 +134,53 @@ public class EnemyManager : MonoBehaviour
         }
         return Vector3.zero;
     }
+
+    private IEnumerator CoCheckVisible()
+    {
+        canCheckVisible = false;
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy == null) continue;
+            if (enemy.isDead) continue;
+
+            if (IsEnemyVisible(enemy)) { enemy.Stop(); }
+            else { enemy.Chase(); }
+        }
+        yield return new WaitForSeconds(visibilityCheckInterval);
+        canCheckVisible = true;
+    }
+
+    private bool IsEnemyVisible(Enemy enemy)
+    {
+        Vector3 camPos = cam.transform.position;
+        Vector3 enemyPos = enemy.transform.position + Vector3.up * enemy.agent.height / 2;
+        Vector3 toEnemy = enemyPos - camPos;
+        float distance = toEnemy.magnitude;
+        if (distance <= 0.001f) { print("Too Close"); return false; }
+
+        bool inFront = Vector3.Dot(cam.transform.forward, toEnemy.normalized) >= cosThreshold;
+        if (!inFront) { print("Not Front"); return false; }
+
+        Vector3 viewportPos = cam.WorldToViewportPoint(enemyPos);
+        bool inViewport = viewportPos.x >= 0 && viewportPos.x <= 1 &&
+                          viewportPos.y >= 0 && viewportPos.y <= 1 &&
+                          viewportPos.z > 0;
+
+        if (inViewport) { print("In viewport"); return true; }
+        else { print("Not in viewport"); return false; }
+    }
+
+    private IEnumerator CoUpdateTarget()
+    {
+        canUpdateTarget = false;
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy == null) continue;
+            if (enemy.agent.isStopped) continue;
+            enemy.SetTarget(player.transform);
+        }
+        yield return new WaitForSeconds(followTargetInterval);
+        canUpdateTarget = true;
+    }
+
 }

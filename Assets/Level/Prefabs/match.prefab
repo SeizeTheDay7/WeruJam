@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -270
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}
       propertyPath: m_Name
       value: match
@@ -69,6 +73,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2726328101797972756}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2715127727111100628}
   m_SourcePrefab: {fileID: 100100000, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}
 --- !u!1 &5017853413794645548 stripped
 GameObject:
@@ -141,3 +148,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.00315165, y: 0.00018437221, z: 0.0001843719}
   m_Center: {x: -0.0010261029, y: -4.743077e-10, z: 6.775111e-11}
+--- !u!114 &2715127727111100628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017853413794645548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0fc314cfa3aa547ada5ad2e2758857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  duration: 1
+  PropertyName: BurnLerp

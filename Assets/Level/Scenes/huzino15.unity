@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3536015542855371192, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: spawnInterval
-      value: 100000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3536015542855371192, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: enemyPrefabs.Array.size
@@ -219,10 +219,85 @@ PrefabInstance:
       propertyPath: Lens.FieldOfView
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 5532441354845619312, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532441354845619312, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532441354845619312, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532441354845619312, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[0].Position.x
+      value: -32.855316
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Position.x
+      value: -0.0000019583294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Position.z
+      value: 32.85531
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Position.x
+      value: 32.855305
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[3].Position.x
+      value: -0.000005874989
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[3].Position.z
+      value: -32.855305
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[0].TangentIn.z
+      value: -18.145487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].TangentIn.z
+      value: -18.145487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].TangentIn.z
+      value: -18.145487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[3].TangentIn.z
+      value: -18.145487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[0].TangentOut.z
+      value: 18.145487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].TangentOut.z
+      value: 18.145487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].TangentOut.z
+      value: 18.145487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[3].TangentOut.z
+      value: 18.145487
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8094361183973075441, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1055025613}
   m_SourcePrefab: {fileID: 100100000, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
 --- !u!1 &330585543
 GameObject:
@@ -649,6 +724,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1055025610 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8094361183973075441, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+  m_PrefabInstance: {fileID: 313270764}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1055025611 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8635303701625216668, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+  m_PrefabInstance: {fileID: 313270764}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055025610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineContainer
+--- !u!114 &1055025613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055025610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad88b3fa989ee7843ba380ef9cb50ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SplineScaleBaker
+  splineContainer: {fileID: 1055025611}
 --- !u!1 &1113628550
 GameObject:
   m_ObjectHideFlags: 0

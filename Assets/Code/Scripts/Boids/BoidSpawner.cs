@@ -4,6 +4,7 @@ using UnityEngine.Splines;
 
 public class BoidSpawner : MonoBehaviour
 {
+    [SerializeField] Transform player;
     [SerializeField] GameObject spawnerCube;
     [SerializeField] GameObject crowPrefab;
     [SerializeField] int crowAmount = 10;
@@ -66,6 +67,7 @@ public class BoidSpawner : MonoBehaviour
         foreach (var boid in boids)
         {
             boid.UpdateBoid();
+            boid.TryCry();
             // BoundToBox(boid.transform);
         }
 

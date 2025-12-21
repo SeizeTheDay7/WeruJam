@@ -16,12 +16,12 @@ public class Weapon : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (currnetFollow)
         {
-            rb.MovePosition(currnetFollow.position);
-            rb.MoveRotation(currnetFollow.rotation);
+            transform.position = currnetFollow.position;
+            transform.rotation = currnetFollow.rotation;
         }
     }
 
@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.Collapse();
+                enemy.Die();
                 Terminate();
             }
         }

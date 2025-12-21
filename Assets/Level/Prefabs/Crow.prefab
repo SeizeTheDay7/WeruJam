@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7078803216869839871}
   - component: {fileID: -8303208828160503616}
   - component: {fileID: 6549528774405816317}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Crow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -295,9 +295,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5434509293568456994, guid: 1e304826b7534ad40acaac5442aab27a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e304826b7534ad40acaac5442aab27a, type: 3}
       propertyPath: m_Name
       value: bird
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e304826b7534ad40acaac5442aab27a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888855621317163717, guid: 1e304826b7534ad40acaac5442aab27a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

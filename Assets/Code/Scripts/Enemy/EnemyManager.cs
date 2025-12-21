@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] SplineContainer splineContainer;
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject[] enemyPrefabs;
 
     [Header("Parameter")]
     [SerializeField] int spawnAmount = 8;
@@ -43,7 +44,11 @@ public class EnemyManager : MonoBehaviour
 
     private Enemy OnCreatePoolEnemy()
     {
-        Enemy enemy = Instantiate(enemyPrefab).GetComponent<Enemy>();
+        int index = Random.Range(0, enemyPrefabs.Length);
+        GameObject prefabToSpawn = enemyPrefabs[index];
+
+        Enemy enemy = Instantiate(prefabToSpawn).GetComponent<Enemy>();
+        // Enemy enemy = Instantiate(enemyPrefab).GetComponent<Enemy>();
         enemy.OnCollapse += OnEnemyCollapse;
         return enemy;
     }

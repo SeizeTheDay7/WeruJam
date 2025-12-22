@@ -331,7 +331,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 408472813}
-  - component: {fileID: 408472814}
   - component: {fileID: 408472815}
   m_Layer: 5
   m_Name: GameObject
@@ -339,7 +338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &408472813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -358,23 +357,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -2064.225}
-  m_SizeDelta: {x: 912.68, y: 0}
+  m_AnchoredPosition: {x: 100, y: -2097.565}
+  m_SizeDelta: {x: 912.68, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &408472814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408472812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
 --- !u!114 &408472815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +397,6 @@ GameObject:
   - component: {fileID: 493503099}
   - component: {fileID: 493503102}
   - component: {fileID: 493503101}
-  - component: {fileID: 493503100}
   - component: {fileID: 493503103}
   m_Layer: 5
   m_Name: Text (TMP) (2)
@@ -438,22 +422,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 686.005, y: -85}
-  m_SizeDelta: {x: 453.35, y: 0}
+  m_SizeDelta: {x: 453.35, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &493503100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493503098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
 --- !u!114 &493503101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,7 +590,6 @@ GameObject:
   - component: {fileID: 795807407}
   - component: {fileID: 795807410}
   - component: {fileID: 795807409}
-  - component: {fileID: 795807408}
   - component: {fileID: 795807411}
   m_Layer: 5
   m_Name: Text (TMP) (1)
@@ -646,22 +615,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 85.005, y: -85}
-  m_SizeDelta: {x: 170.01, y: 0}
+  m_SizeDelta: {x: 170.01, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &795807408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 795807406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
 --- !u!114 &795807409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1076,7 +1031,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159125363}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
@@ -1087,9 +1042,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 1272.83
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -1106,8 +1061,10 @@ GameObject:
   - component: {fileID: 1247912433}
   - component: {fileID: 1247912434}
   - component: {fileID: 1247912435}
+  - component: {fileID: 1247912436}
+  - component: {fileID: 1247912437}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1142,6 +1099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneManager
   mainSceneName: Main
   gameSceneName: Game
+  deadSceneName: Dead
 --- !u!82 &1247912435
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1151,7 +1109,7 @@ AudioSource:
   m_GameObject: {fileID: 1247912432}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3349136089242318700, guid: 682fdf11417948f4c84465e0dfe2bafe, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 3f9f64dd4b5a34847acb23c59094bd37, type: 3}
   m_PlayOnAwake: 1
@@ -1239,6 +1197,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1247912436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247912432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0fc5a367b8fa14a8fc9b30202007ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  bgm: {fileID: -3349136089242318700, guid: 682fdf11417948f4c84465e0dfe2bafe, type: 2}
+  sfx: {fileID: 1958613509379388804, guid: 682fdf11417948f4c84465e0dfe2bafe, type: 2}
+  scream: {fileID: -8788735331786210790, guid: 682fdf11417948f4c84465e0dfe2bafe, type: 2}
+--- !u!114 &1247912437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247912432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b0aef7bbde63640a06ab8907f75a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeadScene
 --- !u!1 &1437694376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,7 +1235,6 @@ GameObject:
   - component: {fileID: 1437694377}
   - component: {fileID: 1437694379}
   - component: {fileID: 1437694378}
-  - component: {fileID: 1437694380}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1274,8 +1258,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -688.075}
-  m_SizeDelta: {x: 694.07, y: 0}
+  m_AnchoredPosition: {x: 100, y: -654.73505}
+  m_SizeDelta: {x: 694.07, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1437694378
 MonoBehaviour:
@@ -1376,20 +1360,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437694376}
   m_CullTransparentMesh: 1
---- !u!114 &1437694380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437694376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
 --- !u!1 &1455679233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,8 +1369,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455679236}
-  - component: {fileID: 1455679238}
   - component: {fileID: 1455679237}
+  - component: {fileID: 1455679240}
+  - component: {fileID: 1455679239}
   m_Layer: 0
   m_Name: ScriptText
   m_TagString: Untagged
@@ -1524,7 +1495,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1455679238
+--- !u!114 &1455679239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1533,14 +1504,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455679233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88865afe82ec8ca4799da4019fd398b1, type: 3}
+  m_Script: {fileID: 11500000, guid: d5e224a83fd32bc4b9f9e7183ffaa07a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScriptHolder
+  m_EditorClassIdentifier: Assembly-CSharp::DeadScriptEnd
+  buttonDiv: {fileID: 408472812}
+--- !u!114 &1455679240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455679233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e065c90fca867db478427a2fc50fcb1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripter
   tmp: {fileID: 1437694378}
   script:
-  - "\uB208\uC744 \uB728\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
-  canSkip: 0
-  textCoolTime: 0.2
+  - "\uC9D1\uC774 \uBA40\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4..."
+  - "\uB2E4\uC2DC \uB208\uC744 \uB728\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+  letterCoolTime: 0.2
+  scriptCoolTime: 1
+  scriptEnd: {fileID: 1455679239}
 --- !u!1 &1621225756
 GameObject:
   m_ObjectHideFlags: 0

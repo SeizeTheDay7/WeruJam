@@ -10,12 +10,14 @@ public class ScriptHolder : MonoBehaviour
     [SerializeField] string[] script;
     [SerializeField] bool canSkip;
     [SerializeField] float textCoolTime = 0.1f;
+    [SerializeField] GameObject buttonDiv;
     AudioSource audioSource;
     // 오버엔지니어링
     // [SerializeField] bool autoEnd;
-    // [SerializeField] float scriptEndWaitTime = 2f;
+    [SerializeField] float scriptEndWaitTime = 2f;
     int scriptIdx;
     bool nowReading;
+    bool flag = false;
 
     // 처음엔 아무 글자도 안 보여주다가 한 글자씩 출력
     // 클릭하면 텍스트 스킵되거나, 텍스트 이미 다 보여줬다면 다음 텍스트로 넘어감
@@ -39,6 +41,11 @@ public class ScriptHolder : MonoBehaviour
         {
             ProceedText();
         }
+        else if (!flag && scriptIdx == script.Length - 1)
+        {
+            flag = true;
+            StartCoroutine(CoEnableButton());
+        }
     }
 
     private void SkipText()
@@ -46,6 +53,7 @@ public class ScriptHolder : MonoBehaviour
         // 다음 텍스트로
         if (tmp.maxVisibleCharacters == tmp.text.Length)
         {
+            if (scriptIdx == script.Length - 1) return;
             tmp.maxVisibleCharacters = 0;
             tmp.text = script[++scriptIdx];
         }
@@ -71,5 +79,11 @@ public class ScriptHolder : MonoBehaviour
         nowReading = true;
         yield return new WaitForSeconds(textCoolTime);
         nowReading = false;
+    }
+
+    private IEnumerator CoEnableButton()
+    {
+        yield return new WaitForSeconds(textCoolTime * 3);
+        buttonDiv.SetActive(true);
     }
 }

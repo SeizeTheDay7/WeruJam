@@ -1,19 +1,28 @@
 using UnityEngine;
 using System;
+using System.Collections;
+
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField] LayerMask groundMask;
     [SerializeField] LayerMask enemyMask;
     [SerializeField] Adjuster_MarchShader shader;
+    [SerializeField] Light weaponLight;
+    [SerializeField] AnimationCurve extinguishCurve;
+    [SerializeField] float extinguishCurveDuration = 5f;
+    float extinguishStartTime;
 
     public event Action<Weapon> OnDestroyed;
     Rigidbody rb;
     bool isTerminated = false;
     Transform currnetFollow;
+    bool isExtinguishing = false;
+    float initLightIntensity;
 
     void Awake()
     {
+        initLightIntensity = 15f;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -23,6 +32,12 @@ public class Weapon : MonoBehaviour
         {
             transform.position = currnetFollow.position;
             transform.rotation = currnetFollow.rotation;
+        }
+
+        if (isExtinguishing)
+        {
+            float t = (Time.time - extinguishStartTime) / extinguishCurveDuration;
+            weaponLight.intensity = extinguishCurve.Evaluate(t) * initLightIntensity;
         }
     }
 
@@ -76,12 +91,21 @@ public class Weapon : MonoBehaviour
         ResetVelocity();
         rb.isKinematic = true;
 
-        OnDestroyed?.Invoke(this);
+        StartCoroutine(CoDestroy());
     }
 
     private void ResetVelocity()
     {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+    }
+
+    private IEnumerator CoDestroy()
+    {
+        isExtinguishing = true;
+        extinguishStartTime = Time.time;
+        yield return new WaitForSeconds(extinguishCurveDuration);
+
+        OnDestroyed?.Invoke(this);
     }
 }

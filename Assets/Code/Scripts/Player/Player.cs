@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public PlayerMove move { get; private set; }
     public PlayerAttack attack { get; private set; }
     public PlayerInteract interact { get; private set; }
+    public bool isDead { get; private set; } = false;
 
 
     void Awake()
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
 
     public void Shutdown(Transform enemy)
     {
+        isDead = true;
         move.Shutdown(enemy.GetComponent<Enemy>());
         attack.Shutdown();
         attack.enabled = false;

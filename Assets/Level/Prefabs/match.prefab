@@ -231,6 +231,75 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shader: {fileID: 2715127727111100628}
+  weaponLight: {fileID: 5319959563262252732}
+  holdingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.015354532
+      value: 0.7634862
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.41968408
+      value: 0.9918091
+      inSlope: 0.6658853
+      outSlope: 0.6658853
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99796224
+      value: 0.7873015
+      inSlope: 0.046636313
+      outSlope: 0.046636313
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.25629345
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  holdingCurveDuration: 3
+  extinguishCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.011241913
+      value: 0.97776794
+      inSlope: 0.059563216
+      outSlope: 0.059563216
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.20606185
+    - serializedVersion: 3
+      time: 0.41756415
+      value: 0.47451675
+      inSlope: -1.2071052
+      outSlope: -1.2071052
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0010376
+      value: -0.060317993
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  extinguishCurveDuration: 3
 --- !u!54 &3915280655383536334
 Rigidbody:
   m_ObjectHideFlags: 0

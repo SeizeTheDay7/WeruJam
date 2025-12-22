@@ -1,21 +1,47 @@
 using UnityEngine;
 using System;
+using System.Collections;
+
+public enum WeaponState
+{
+    None,
+    Holding,
+    Extinguishing
+}
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField] LayerMask groundMask;
     [SerializeField] LayerMask enemyMask;
     [SerializeField] Adjuster_MarchShader shader;
+    [SerializeField] Light weaponLight;
+    [SerializeField] AnimationCurve holdingCurve;
+    [SerializeField] float holdingCurveDuration = 3f;
+    float holdingStartTime;
+    [SerializeField] AnimationCurve extinguishCurve;
+    [SerializeField] float extinguishCurveDuration = 5f;
+    float extinguishStartTime;
 
     public event Action<Weapon> OnDestroyed;
     Rigidbody rb;
     bool isTerminated = false;
     Transform currnetFollow;
+    WeaponState state;
+    float initLightIntensity;
+
+    public void HoldingLight()
+    {
+        initLightIntensity = weaponLight.intensity;
+        state = WeaponState.Holding;
+        holdingStartTime = Time.time;
+    }
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        state = WeaponState.None;
     }
+
 
     void Update()
     {
@@ -23,6 +49,23 @@ public class Weapon : MonoBehaviour
         {
             transform.position = currnetFollow.position;
             transform.rotation = currnetFollow.rotation;
+        }
+
+        switch (state)
+        {
+            case WeaponState.Holding:
+                {
+                    float t = (Time.time - holdingStartTime) / holdingCurveDuration;
+                    weaponLight.intensity = holdingCurve.Evaluate(t) * initLightIntensity;
+                    break;
+                }
+
+            case WeaponState.Extinguishing:
+                {
+                    float t = (Time.time - extinguishStartTime) / extinguishCurveDuration;
+                    weaponLight.intensity = extinguishCurve.Evaluate(t) * initLightIntensity;
+                    break;
+                }
         }
     }
 
@@ -76,12 +119,21 @@ public class Weapon : MonoBehaviour
         ResetVelocity();
         rb.isKinematic = true;
 
-        OnDestroyed?.Invoke(this);
+        StartCoroutine(CoDestroy());
     }
 
     private void ResetVelocity()
     {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+    }
+
+    private IEnumerator CoDestroy()
+    {
+        state = WeaponState.Extinguishing;
+        extinguishStartTime = Time.time;
+        yield return new WaitForSeconds(extinguishCurveDuration);
+
+        OnDestroyed?.Invoke(this);
     }
 }

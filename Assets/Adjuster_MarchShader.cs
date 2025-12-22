@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Adjuster_MarchShader : MonoBehaviour
 {
+    Weapon weapon;
     private MeshRenderer _renderer;
     [SerializeField]
     private float duration;
@@ -15,6 +16,7 @@ public class Adjuster_MarchShader : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        weapon = GetComponent<Weapon>();
         _renderer = GetComponent<MeshRenderer>();
         PropertyName = "_" + PropertyName;
         Socket = transform.GetChild(0).gameObject;
@@ -55,7 +57,7 @@ public class Adjuster_MarchShader : MonoBehaviour
 
     private void OnFinished()
     {
-        // ���� ó��
+        weapon.HoldingLight();
     }
 
     public void OnFire()

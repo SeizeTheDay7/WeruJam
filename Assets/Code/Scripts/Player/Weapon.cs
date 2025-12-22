@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour
 
     public void LightUp()
     {
-        shader.OnFire();
+        shader.OnFire(1f);
     }
 
     public void Launch(Vector3 direction, float power)

@@ -119,6 +119,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &4117798 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5105935333527093679, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+  m_PrefabInstance: {fileID: 313270764}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4117812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f141dbea64342a4e8564cd5803c9089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDead
+  fpsCam: {fileID: 798650115}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!136 &4117813
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117798}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.21
+  m_Height: 3.62
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.79, z: 0}
 --- !u!1 &175306537
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +301,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5105935333527093679, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4117812}
+    - targetCorrespondingSourceObject: {fileID: 5105935333527093679, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4117813}
   m_SourcePrefab: {fileID: 100100000, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
 --- !u!1 &330585543
 GameObject:
@@ -800,6 +850,17 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &798650115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5178274682217083615, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+  m_PrefabInstance: {fileID: 313270764}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

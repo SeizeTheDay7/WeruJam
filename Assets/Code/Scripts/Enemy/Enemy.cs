@@ -62,4 +62,10 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(collapseAfter);
         OnCollapse?.Invoke(this);
     }
+
+    public void Shutdown()
+    {
+        StopAllCoroutines();
+        agent.isStopped = true;
+    }
 }

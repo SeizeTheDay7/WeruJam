@@ -1369,8 +1369,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455679236}
-  - component: {fileID: 1455679238}
   - component: {fileID: 1455679237}
+  - component: {fileID: 1455679240}
+  - component: {fileID: 1455679239}
   m_Layer: 0
   m_Name: ScriptText
   m_TagString: Untagged
@@ -1494,7 +1495,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1455679238
+--- !u!114 &1455679239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1503,17 +1504,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455679233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88865afe82ec8ca4799da4019fd398b1, type: 3}
+  m_Script: {fileID: 11500000, guid: d5e224a83fd32bc4b9f9e7183ffaa07a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScriptHolder
+  m_EditorClassIdentifier: Assembly-CSharp::DeadScriptEnd
+  buttonDiv: {fileID: 408472812}
+--- !u!114 &1455679240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455679233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e065c90fca867db478427a2fc50fcb1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripter
   tmp: {fileID: 1437694378}
   script:
   - "\uC9D1\uC774 \uBA40\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4..."
   - "\uB2E4\uC2DC \uB208\uC744 \uB728\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
-  canSkip: 1
-  textCoolTime: 0.275
-  buttonDiv: {fileID: 408472812}
-  scriptEndWaitTime: 2
+  letterCoolTime: 0.2
+  scriptCoolTime: 1
+  scriptEnd: {fileID: 1455679239}
 --- !u!1 &1621225756
 GameObject:
   m_ObjectHideFlags: 0

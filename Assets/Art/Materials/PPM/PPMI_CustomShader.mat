@@ -106,9 +106,9 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _FogColor: 1
-    - _FogContrast: 0.25
+    - _FogContrast: 0.75
     - _FogDistance: 30
-    - _FogMixer: 0.79
+    - _FogMixer: 0.85
     - _FogMixerMax: 0.95
     - _FogMixerMin: 1.31
     - _GlossMapScale: 0

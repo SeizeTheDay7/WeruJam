@@ -5,7 +5,7 @@ using UnityEngine.Splines;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : Singleton<EnemyManager>
 {
     [Header("Component")]
     [SerializeField] Player player;
@@ -36,11 +36,22 @@ public class EnemyManager : MonoBehaviour
     Vector3 enemySpawnPosition;
     Camera cam;
     float cosThreshold;
+    bool isShutdown = false;
 
-    void Awake()
+    public void Shutdown()
+    {
+        isShutdown = true;
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy == null) continue;
+            enemy.Shutdown();
+        }
+    }
+
+    protected override void OnAwake()
     {
         cam = Camera.main;
-        cosThreshold = Mathf.Cos(90 * Mathf.Deg2Rad);
+        cosThreshold = Mathf.Cos(180 * Mathf.Deg2Rad);
 
         enemyPool = new ObjectPool<Enemy>(
             createFunc: OnCreatePoolEnemy,
@@ -98,6 +109,7 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        if (isShutdown) return;
         if (canSpawn) StartCoroutine(CoSpawn());
         if (canCheckVisible) StartCoroutine(CoCheckVisible());
         if (canUpdateTarget) StartCoroutine(CoUpdateTarget());
@@ -156,18 +168,18 @@ public class EnemyManager : MonoBehaviour
         Vector3 enemyPos = enemy.transform.position + Vector3.up * enemy.agent.height / 2;
         Vector3 toEnemy = enemyPos - camPos;
         float distance = toEnemy.magnitude;
-        if (distance <= 0.001f) { print("Too Close"); return false; }
+        if (distance <= 0.001f) { return false; }
 
         bool inFront = Vector3.Dot(cam.transform.forward, toEnemy.normalized) >= cosThreshold;
-        if (!inFront) { print("Not Front"); return false; }
+        if (!inFront) { return false; }
 
         Vector3 viewportPos = cam.WorldToViewportPoint(enemyPos);
         bool inViewport = viewportPos.x >= 0 && viewportPos.x <= 1 &&
                           viewportPos.y >= 0 && viewportPos.y <= 1 &&
                           viewportPos.z > 0;
 
-        if (inViewport) { print("In viewport"); return true; }
-        else { print("Not in viewport"); return false; }
+        if (inViewport) { return true; }
+        else { return false; }
     }
 
     private IEnumerator CoUpdateTarget()

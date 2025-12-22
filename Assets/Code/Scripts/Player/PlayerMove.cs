@@ -34,6 +34,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float frequencyGain_walk = 1.5f;
     [SerializeField] float amplitudeGain_run = 3f;
     [SerializeField] float frequencyGain_run = 2.2f;
+    [SerializeField] float amplitudeGain_Die = 4f;
+    [SerializeField] float frequencyGain_Die = 10f;
 
     [Header("Action")]
     InputAction moveAction;
@@ -51,6 +53,23 @@ public class PlayerMove : MonoBehaviour
     float runTimeLeft;
     bool isExhausted = false;
     bool isRunning = false;
+    bool isDead = false;
+    Vector3 targetPos;
+
+    public void Shutdown(Enemy enemy)
+    {
+        isDead = true;
+
+        enemy.transform.LookAt(transform);
+
+        player_vcam.Lens.FieldOfView = 25f;
+        player_vcam.GetComponent<CinemachinePanTilt>().enabled = false;
+        var perlin = player_vcam.GetComponent<CinemachineBasicMultiChannelPerlin>();
+        perlin.AmplitudeGain = amplitudeGain_Die;
+        perlin.FrequencyGain = frequencyGain_Die;
+
+        targetPos = enemy.transform.position + enemy.agent.height * Vector3.up * 2 / 3;
+    }
 
     void Awake()
     {
@@ -90,6 +109,12 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (isDead)
+        {
+            LerpLookAtTarget();
+            SyncPlayerBody();
+            return;
+        }
         SyncPlayerBody();
         GetInput();
         CheckRunning();
@@ -100,6 +125,15 @@ public class PlayerMove : MonoBehaviour
         CollisionFlags flags = characterController.Move(direction * moveSpeed * Time.deltaTime);
         if ((flags & CollisionFlags.Above) != 0 && verticalVelocity > 0)
             verticalVelocity = 0f; // 천장에 닿았으면 속도 제거
+    }
+
+    private void LerpLookAtTarget()
+    {
+        // player_vacm을 회전
+        Vector3 directionToTarget = targetPos - player_vcam.transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        player_vcam.transform.rotation = Quaternion.Slerp(player_vcam.transform.rotation, targetRotation, Time.deltaTime * 20);
+
     }
 
     private void SyncPlayerBody()

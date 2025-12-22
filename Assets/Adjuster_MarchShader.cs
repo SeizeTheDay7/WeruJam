@@ -3,22 +3,33 @@ using System.Collections;
 
 public class Adjuster_MarchShader : MonoBehaviour
 {
+    Weapon weapon;
     private MeshRenderer _renderer;
     [SerializeField]
     private float duration;
     [SerializeField]
     private string PropertyName;
 
+    private GameObject Socket;
+    private Light pointLight;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        weapon = GetComponent<Weapon>();
         _renderer = GetComponent<MeshRenderer>();
         PropertyName = "_" + PropertyName;
+        Socket = transform.GetChild(0).gameObject;
+        pointLight = Socket.GetComponent<Light>();
+        pointLight.intensity = 0f;
+        pointLight.range = 10f;
+        pointLight.color = ColorUtility.TryParseHtmlString("#FF8000", out var c) ? c : Color.white;
     }
 
     private void OnDisable()
     {
         _renderer.material.SetFloat(PropertyName, 0);
+        pointLight.intensity = 0f;
     }
 
     private IEnumerator CallEveryFrameForSeconds(float seconds)
@@ -27,29 +38,31 @@ public class Adjuster_MarchShader : MonoBehaviour
 
         while (elapsed < seconds)
         {
-            //¸Å ÇÁ·¹ÀÓ ½ÇÇàÇÒ ÄÚµå
-            OnFrame(elapsed / seconds); // 0~1 Á¤±ÔÈ­ °ª
+            //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
+            OnFrame(elapsed / seconds); // 0~1 ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½
 
             elapsed += Time.deltaTime;
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
 
-        //Á¾·á ½Ã ÇÑ ¹ø ½ÇÇà
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         OnFinished();
     }
 
     private void OnFrame(float t01)
     {
         _renderer.material.SetFloat(PropertyName, t01);
+        pointLight.intensity = Mathf.Lerp(0f, 15f, t01);
     }
 
     private void OnFinished()
     {
-        // Á¾·á Ã³¸®
+
     }
 
     public void OnFire()
     {
+        print("OnFire");
         StartCoroutine(CallEveryFrameForSeconds(duration));
     }
 }

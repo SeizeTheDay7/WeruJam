@@ -38,7 +38,7 @@ public class UIManager : Singleton<UIManager>
         if (player.isDead)
         {
             escCanvas.SetActive(false);
-            Time.timeScale = 0f;
+            Time.timeScale = 1f;
             return;
         }
         escCanvas.SetActive(!escCanvas.activeSelf);

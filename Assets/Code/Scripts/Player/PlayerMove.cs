@@ -132,7 +132,7 @@ public class PlayerMove : MonoBehaviour
         // player_vacm을 회전
         Vector3 directionToTarget = targetPos - player_vcam.transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-        player_vcam.transform.rotation = Quaternion.Slerp(player_vcam.transform.rotation, targetRotation, Time.deltaTime * 10);
+        player_vcam.transform.rotation = Quaternion.Slerp(player_vcam.transform.rotation, targetRotation, Time.deltaTime * 20);
 
     }
 

@@ -51,7 +51,7 @@ public class EnemyManager : Singleton<EnemyManager>
     protected override void OnAwake()
     {
         cam = Camera.main;
-        cosThreshold = Mathf.Cos(90 * Mathf.Deg2Rad);
+        cosThreshold = Mathf.Cos(180 * Mathf.Deg2Rad);
 
         enemyPool = new ObjectPool<Enemy>(
             createFunc: OnCreatePoolEnemy,

@@ -39,6 +39,7 @@ public class PlayerAttack : MonoBehaviour, IRechargeBullet
     [SerializeField] float attackPower = 50f;
 
     [Header("Calculation")]
+    [HideInInspector] public bool isDead = false;
     Weapon currentWeapon;
     AttackPhase phase;
 
@@ -62,6 +63,12 @@ public class PlayerAttack : MonoBehaviour, IRechargeBullet
         attackAction.performed -= OnAttack;
     }
 
+    public void Shutdown()
+    {
+        isDead = true;
+        dummyBox.transform.gameObject.SetActive(false);
+    }
+
     public void RechargeBullet()
     {
         dummyBox.Recharge();
@@ -70,6 +77,7 @@ public class PlayerAttack : MonoBehaviour, IRechargeBullet
     #region Attack Event
     void OnAttack(InputAction.CallbackContext context)
     {
+        if (isDead) return;
         switch (phase)
         {
             case AttackPhase.NotArmed:
@@ -91,6 +99,12 @@ public class PlayerAttack : MonoBehaviour, IRechargeBullet
         animator.Play("GrabWeapon");
         phase = AttackPhase.Grabbing;
         StartCoroutine(CoStartHold(1.25f));
+    }
+
+    private IEnumerator CoStartHold(float animTime)
+    {
+        yield return new WaitForSeconds(animTime);
+        StartHold();
     }
 
     /// <summary>
@@ -116,27 +130,21 @@ public class PlayerAttack : MonoBehaviour, IRechargeBullet
     /// </summary>
     void OnGrabWeapon()
     {
+        if (isDead) return;
         dummyBox.DisableDummyWeapon();
         currentWeapon = weaponPool.Get();
         currentWeapon.ResetWeapon(hand_right_pinpoint);
     }
 
-    private IEnumerator CoStartHold(float animTime)
-    {
-        yield return new WaitForSeconds(animTime);
-        StartHold();
-    }
-
-    // TODO :: 나중에 shader 들어오면 추가
     void OnLightMatch()
     {
-        // currentWeapon.LightUp();
+        currentWeapon.LightUp();
     }
 
     void OnAttackEnd()
     {
+        if (isDead) return;
         Vector3 camUpperForward = (cam.forward + cam.up).normalized;
-
 
         currentWeapon.Launch(camUpperForward, attackPower);
         currentWeapon.transform.SetParent(null);

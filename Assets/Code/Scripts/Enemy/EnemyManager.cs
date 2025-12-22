@@ -5,7 +5,7 @@ using UnityEngine.Splines;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : Singleton<EnemyManager>
 {
     [Header("Component")]
     [SerializeField] Player player;
@@ -36,8 +36,19 @@ public class EnemyManager : MonoBehaviour
     Vector3 enemySpawnPosition;
     Camera cam;
     float cosThreshold;
+    bool isShutdown = false;
 
-    void Awake()
+    public void Shutdown()
+    {
+        isShutdown = true;
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy == null) continue;
+            enemy.Shutdown();
+        }
+    }
+
+    protected override void OnAwake()
     {
         cam = Camera.main;
         cosThreshold = Mathf.Cos(90 * Mathf.Deg2Rad);
@@ -98,6 +109,7 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        if (isShutdown) return;
         if (canSpawn) StartCoroutine(CoSpawn());
         if (canCheckVisible) StartCoroutine(CoCheckVisible());
         if (canUpdateTarget) StartCoroutine(CoUpdateTarget());

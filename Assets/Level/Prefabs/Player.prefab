@@ -166,7 +166,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -1044,21 +1044,24 @@ MonoBehaviour:
   impulse_walk: {fileID: 8057614163190200865}
   impulse_run: {fileID: 8804811950007465132}
   moveSpeed: 3
-  gravityMult: 3
+  fullRunTime: 5
+  runRecoveryCoolTime: 1.5
+  runRecoverySpeed: 5
+  minRunnableTime: 2
   jumpMult: 0.5
   runMult: 2
   walk_gap: 0.75
   run_gap: 0.35
-  amplitudeGain_walk: 1.5
-  frequencyGain_walk: 1.5
-  amplitudeGain_run: 3
-  frequencyGain_run: 3
   footstepSounds:
   - {fileID: 8300000, guid: 8a55c13461fbdd8438e9b0507a0a1f35, type: 3}
   - {fileID: 8300000, guid: 8376caad6a96e2c4f8355c8246324ca8, type: 3}
   - {fileID: 8300000, guid: 9e971496eb922f248935106f99d65126, type: 3}
   - {fileID: 8300000, guid: a45c38b25444cd64e8cdd99f4af0e9f7, type: 3}
   footstep: {fileID: 2319445856948971849}
+  amplitudeGain_walk: 1.5
+  frequencyGain_walk: 1.5
+  amplitudeGain_run: 3
+  frequencyGain_run: 3
 --- !u!114 &8057614163190200865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1337,13 +1340,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   player: {fileID: 9120587461662776004}
   splineContainer: {fileID: 8635303701625216668}
-  enemyPrefab: {fileID: 1251064906076386639, guid: 7daacfb0e0bbb4641878eb569b397c4c, type: 3}
-  spawnAmount: 0
-  spawnInterval: 10
-  followTargetInterval: 0.1
-  navmeshSampleRadius: 5
+  enemyPrefab: {fileID: 2970819761735063644, guid: f12bd22c1ce13454194519d5d7f5be5c, type: 3}
+  enemyPrefabs:
+  - {fileID: 2970819761735063644, guid: f12bd22c1ce13454194519d5d7f5be5c, type: 3}
+  - {fileID: 2970819761735063644, guid: f8af5f91db1f1164b9aa826430c539ed, type: 3}
+  - {fileID: 2970819761735063644, guid: 2e89e630d407871479ae0b75f57fc7aa, type: 3}
+  - {fileID: 2970819761735063644, guid: 279af648105c2924199449ab61580d0b, type: 3}
+  - {fileID: 2970819761735063644, guid: e2370a1ad65137947b91dd03527ebcb1, type: 3}
+  spawnAmount: 10
+  spawnInterval: 1000
   mapMaxHeight: 90
   checkRayLength: 100
+  followTargetInterval: 0.1
+  visibilityCheckInterval: 0.05
+  navmeshSampleRadius: 5
 --- !u!114 &8738189057364049356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1488,6 +1498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5532441354845619312}
   - component: {fileID: 8635303701625216668}
+  - component: {fileID: 8932609895655504149}
   m_Layer: 0
   m_Name: Spline
   m_TagString: Untagged
@@ -1504,8 +1515,8 @@ Transform:
   m_GameObject: {fileID: 8094361183973075441}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7069834, z: -0, w: 0.7072302}
-  m_LocalPosition: {x: 0.38120097, y: -2.76, z: 5.986334}
-  m_LocalScale: {x: 64.38999, y: 64.39, z: 64.38999}
+  m_LocalPosition: {x: 0.38120097, y: 0, z: 5.986334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1604655528857971514}
@@ -1539,17 +1550,17 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: -0.5
+        x: -32.855316
         y: 0
         z: 0
       TangentIn:
         x: -0
         y: -0
-        z: -0.27614236
+        z: -18.145487
       TangentOut:
         x: 0
         y: 0
-        z: 0.27614236
+        z: 18.145487
       Rotation:
         value:
           x: 0
@@ -1557,17 +1568,17 @@ MonoBehaviour:
           z: 0
           w: 1
     - Position:
-        x: -0.000000029802322
+        x: -0.0000019583294
         y: 0
-        z: 0.49999997
+        z: 32.85531
       TangentIn:
         x: -0
         y: -0
-        z: -0.27614236
+        z: -18.145487
       TangentOut:
         x: 0
         y: 0
-        z: 0.27614236
+        z: 18.145487
       Rotation:
         value:
           x: 0
@@ -1575,17 +1586,17 @@ MonoBehaviour:
           z: 0
           w: 0.70710677
     - Position:
-        x: 0.49999988
+        x: 32.855305
         y: 0
         z: 0
       TangentIn:
         x: -0
         y: -0
-        z: -0.27614236
+        z: -18.145487
       TangentOut:
         x: 0
         y: 0
-        z: 0.27614236
+        z: 18.145487
       Rotation:
         value:
           x: 0
@@ -1593,17 +1604,17 @@ MonoBehaviour:
           z: 0
           w: 0
     - Position:
-        x: -0.00000008940697
+        x: -0.000005874989
         y: 0
-        z: -0.4999999
+        z: -32.855305
       TangentIn:
         x: -0
         y: -0
-        z: -0.27614236
+        z: -18.145487
       TangentOut:
         x: 0
         y: 0
-        z: 0.27614236
+        z: 18.145487
       Rotation:
         value:
           x: 0
@@ -1630,6 +1641,19 @@ MonoBehaviour:
       m_Data: []
   m_Knots:
     m_KnotsLink: []
+--- !u!114 &8932609895655504149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8094361183973075441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad88b3fa989ee7843ba380ef9cb50ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SplineScaleBaker
+  splineContainer: {fileID: 8635303701625216668}
 --- !u!1 &8659124975962723573
 GameObject:
   m_ObjectHideFlags: 0

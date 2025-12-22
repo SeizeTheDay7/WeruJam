@@ -43,6 +43,10 @@ public class Scripter : MonoBehaviour
                 scriptEnd.OnScriptEnd(this);
                 return;
             }
+            else
+            {
+                StartCoroutine(CoAutoProceed());
+            }
         }
         // 텍스트가 모두 나왔다면 다음 텍스트로 넘어감
         else
@@ -76,6 +80,13 @@ public class Scripter : MonoBehaviour
             audioSource.Play();
             yield return new WaitForSeconds(letterCoolTime);
         }
+        yield return new WaitForSeconds(scriptCoolTime);
+        scriptIdx++;
+        ProceedScript();
+    }
+
+    private IEnumerator CoAutoProceed()
+    {
         yield return new WaitForSeconds(scriptCoolTime);
         scriptIdx++;
         ProceedScript();

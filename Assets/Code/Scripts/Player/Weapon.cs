@@ -2,12 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public enum WeaponState
-{
-    None,
-    Holding,
-    Extinguishing
-}
 
 public class Weapon : MonoBehaviour
 {
@@ -15,9 +9,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] LayerMask enemyMask;
     [SerializeField] Adjuster_MarchShader shader;
     [SerializeField] Light weaponLight;
-    [SerializeField] AnimationCurve holdingCurve;
-    [SerializeField] float holdingCurveDuration = 3f;
-    float holdingStartTime;
     [SerializeField] AnimationCurve extinguishCurve;
     [SerializeField] float extinguishCurveDuration = 5f;
     float extinguishStartTime;
@@ -26,22 +17,14 @@ public class Weapon : MonoBehaviour
     Rigidbody rb;
     bool isTerminated = false;
     Transform currnetFollow;
-    WeaponState state;
+    bool isExtinguishing = false;
     float initLightIntensity;
-
-    public void HoldingLight()
-    {
-        initLightIntensity = weaponLight.intensity;
-        state = WeaponState.Holding;
-        holdingStartTime = Time.time;
-    }
 
     void Awake()
     {
+        initLightIntensity = 15f;
         rb = GetComponent<Rigidbody>();
-        state = WeaponState.None;
     }
-
 
     void Update()
     {
@@ -51,21 +34,10 @@ public class Weapon : MonoBehaviour
             transform.rotation = currnetFollow.rotation;
         }
 
-        switch (state)
+        if (isExtinguishing)
         {
-            case WeaponState.Holding:
-                {
-                    float t = (Time.time - holdingStartTime) / holdingCurveDuration;
-                    weaponLight.intensity = holdingCurve.Evaluate(t) * initLightIntensity;
-                    break;
-                }
-
-            case WeaponState.Extinguishing:
-                {
-                    float t = (Time.time - extinguishStartTime) / extinguishCurveDuration;
-                    weaponLight.intensity = extinguishCurve.Evaluate(t) * initLightIntensity;
-                    break;
-                }
+            float t = (Time.time - extinguishStartTime) / extinguishCurveDuration;
+            weaponLight.intensity = extinguishCurve.Evaluate(t) * initLightIntensity;
         }
     }
 
@@ -130,7 +102,7 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator CoDestroy()
     {
-        state = WeaponState.Extinguishing;
+        isExtinguishing = true;
         extinguishStartTime = Time.time;
         yield return new WaitForSeconds(extinguishCurveDuration);
 

@@ -57,7 +57,7 @@ public class Adjuster_MarchShader : MonoBehaviour
 
     private void OnFinished()
     {
-        weapon.HoldingLight();
+
     }
 
     public void OnFire()

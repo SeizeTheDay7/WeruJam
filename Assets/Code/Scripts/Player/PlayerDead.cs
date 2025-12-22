@@ -19,6 +19,7 @@ public class PlayerDead : MonoBehaviour
         {
             player.Shutdown(hit.transform);
             EnemyManager.Instance.Shutdown();
+            SoundManager.Instance.MuteAllExceptScream();
         }
     }
 }

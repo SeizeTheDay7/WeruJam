@@ -168,18 +168,18 @@ public class EnemyManager : Singleton<EnemyManager>
         Vector3 enemyPos = enemy.transform.position + Vector3.up * enemy.agent.height / 2;
         Vector3 toEnemy = enemyPos - camPos;
         float distance = toEnemy.magnitude;
-        if (distance <= 0.001f) { print("Too Close"); return false; }
+        if (distance <= 0.001f) { return false; }
 
         bool inFront = Vector3.Dot(cam.transform.forward, toEnemy.normalized) >= cosThreshold;
-        if (!inFront) { print("Not Front"); return false; }
+        if (!inFront) { return false; }
 
         Vector3 viewportPos = cam.WorldToViewportPoint(enemyPos);
         bool inViewport = viewportPos.x >= 0 && viewportPos.x <= 1 &&
                           viewportPos.y >= 0 && viewportPos.y <= 1 &&
                           viewportPos.z > 0;
 
-        if (inViewport) { print("In viewport"); return true; }
-        else { print("Not in viewport"); return false; }
+        if (inViewport) { return true; }
+        else { return false; }
     }
 
     private IEnumerator CoUpdateTarget()

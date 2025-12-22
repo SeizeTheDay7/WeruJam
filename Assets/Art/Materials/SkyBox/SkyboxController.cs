@@ -3,13 +3,13 @@ using UnityEngine;
 public class SkyboxController : MonoBehaviour
 {
     [SerializeField]
-    private float rotationSpeed = 1f;   // 회전 속도
+    private float rotationSpeed;   // 회전 속도
     [SerializeField]
-    private float exposureMin = 0.5f;
+    private float exposureMin;
     [SerializeField]
-    private float exposureMax = 1.5f;
+    private float exposureMax;
     [SerializeField]
-    private float dayLength = 120f;      // 하루 길이 (초)
+    private float dayLength;      // 하루 길이 (초)
 
     Material skyboxMat;
     float time;
@@ -17,6 +17,7 @@ public class SkyboxController : MonoBehaviour
     void Start()
     {
         skyboxMat = RenderSettings.skybox;
+        time = 0f;
     }
 
     void Update()
@@ -27,7 +28,7 @@ public class SkyboxController : MonoBehaviour
 
         //Rotation
         float rotation = time * rotationSpeed;
-        rotation = Mathf.Clamp(rotation , 0f, 360f);
+        rotation = Mathf.Repeat(rotation , 360f);
         skyboxMat.SetFloat("_Rotation", rotation);
 
         //Exposure (사인파로 낮밤 표현)

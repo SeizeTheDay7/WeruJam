@@ -27,14 +27,14 @@ public class Adjuster_MarchShader : MonoBehaviour
 
         while (elapsed < seconds)
         {
-            //¸Å ÇÁ·¹ÀÓ ½ÇÇàÇÒ ÄÚµå
-            OnFrame(elapsed / seconds); // 0~1 Á¤±ÔÈ­ °ª
+            //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
+            OnFrame(elapsed / seconds); // 0~1 ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½
 
             elapsed += Time.deltaTime;
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
 
-        //Á¾·á ½Ã ÇÑ ¹ø ½ÇÇà
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         OnFinished();
     }
 
@@ -45,11 +45,12 @@ public class Adjuster_MarchShader : MonoBehaviour
 
     private void OnFinished()
     {
-        // Á¾·á Ã³¸®
+        // ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
     }
 
     public void OnFire()
     {
+        print("OnFire");
         StartCoroutine(CallEveryFrameForSeconds(duration));
     }
 }

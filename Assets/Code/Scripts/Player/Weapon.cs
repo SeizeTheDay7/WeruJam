@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] LayerMask groundMask;
     [SerializeField] LayerMask enemyMask;
+    [SerializeField] Adjuster_MarchShader shader;
 
     public event Action<Weapon> OnDestroyed;
     Rigidbody rb;
@@ -51,6 +52,11 @@ public class Weapon : MonoBehaviour
         currnetFollow = follow;
         isTerminated = false;
         rb.isKinematic = true;
+    }
+
+    public void LightUp()
+    {
+        shader.OnFire();
     }
 
     public void Launch(Vector3 direction, float power)

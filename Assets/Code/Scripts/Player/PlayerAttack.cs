@@ -127,10 +127,9 @@ public class PlayerAttack : MonoBehaviour, IRechargeBullet
         StartHold();
     }
 
-    // TODO :: 나중에 shader 들어오면 추가
     void OnLightMatch()
     {
-        // currentWeapon.LightUp();
+        currentWeapon.LightUp();
     }
 
     void OnAttackEnd()

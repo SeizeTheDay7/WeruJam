@@ -929,7 +929,7 @@ GameObject:
   - component: {fileID: 2004586594}
   - component: {fileID: 2004586598}
   - component: {fileID: 2004586599}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,12 +1324,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4301738558990264495, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
       propertyPath: rayLength
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4301738558990264495, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
       propertyPath: interactUI
       value: 
       objectReference: {fileID: 1210839734}
+    - target: {fileID: 4301738558990264495, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+      propertyPath: interactMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 5003844756217687426, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
       propertyPath: director
       value: 
@@ -1360,7 +1364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7086087025020331793, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
       propertyPath: endGameMoment
-      value: 2.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8351049944667462875, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
       propertyPath: spawnAmount

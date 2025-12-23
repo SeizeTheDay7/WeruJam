@@ -11,6 +11,7 @@ public interface IInteractable
 
 public class PlayerInteract : MonoBehaviour
 {
+    [SerializeField] LayerMask interactMask;
     [SerializeField] float rayLength = 10f;
     IInteractable curInteract;
     InputAction interactAction;
@@ -43,7 +44,7 @@ public class PlayerInteract : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit rayHit;
         Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
-        if (Physics.Raycast(ray.origin, ray.direction * rayLength, out rayHit)
+        if (Physics.Raycast(ray.origin, ray.direction, out rayHit, rayLength, interactMask)
         && rayHit.transform.TryGetComponent<IInteractable>(out var raycastHandler))
         {
             if (raycastHandler != curInteract)

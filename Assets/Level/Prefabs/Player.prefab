@@ -4039,7 +4039,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a73881b66be523c44b09db42497bdb4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
-  rayLength: 7
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  rayLength: 3
   interactUI: {fileID: 5956855090198670479}
 --- !u!114 &5194259609309598883
 MonoBehaviour:

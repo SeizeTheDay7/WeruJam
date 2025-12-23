@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3465130160140279694}
   - component: {fileID: 534675211712243095}
   - component: {fileID: 3760220561172106889}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mc_muffler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 2619698927249286287}
   - component: {fileID: 7647634714869842052}
   - component: {fileID: 7761418930769495680}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mc_tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 7364861485197213376}
   - component: {fileID: 4291940651548411642}
   - component: {fileID: 2527914495986145995}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mc_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 4990364287244866813}
   - component: {fileID: 5264612088421330307}
   - component: {fileID: 7905253779731241562}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MatchCorpse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9079611289782102117}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.48427087, y: 0.655696, z: -0.3443009, w: 0.46583405}
+  m_LocalRotation: {x: -0.48427352, y: 0.655696, z: -0.34429982, w: 0.4658322}
   m_LocalPosition: {x: -7.654369, y: -0.2331317, z: -0.4927808}
   m_LocalScale: {x: 100.00003, y: 100.000015, z: 100.000046}
   m_ConstrainProportionsScale: 0
@@ -329,7 +329,7 @@ Transform:
   - {fileID: 3465130160140279694}
   - {fileID: 2619698927249286287}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.019, y: 109.203, z: -72.91}
 --- !u!33 &9087825175143299838
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -11,9 +11,12 @@ public interface IInteractable
 
 public class PlayerInteract : MonoBehaviour
 {
+    [SerializeField] LayerMask interactMask;
     [SerializeField] float rayLength = 10f;
     IInteractable curInteract;
     InputAction interactAction;
+    [SerializeField] GameObject interactUI;
+    [SerializeField] AudioSource rechargeAudio;
 
     void Awake()
     {
@@ -34,7 +37,11 @@ public class PlayerInteract : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        curInteract?.OnInteract(this);
+        if (curInteract != null)
+        {
+            curInteract.OnInteract(this);
+            rechargeAudio.Play();
+        }
     }
 
     void Update()
@@ -42,13 +49,14 @@ public class PlayerInteract : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit rayHit;
         Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
-        if (Physics.Raycast(ray.origin, ray.direction * rayLength, out rayHit)
+        if (Physics.Raycast(ray.origin, ray.direction, out rayHit, rayLength, interactMask)
         && rayHit.transform.TryGetComponent<IInteractable>(out var raycastHandler))
         {
             if (raycastHandler != curInteract)
             {
                 curInteract?.OnExitHit(this);
                 curInteract = raycastHandler;
+                interactUI.SetActive(true);
                 curInteract.OnHit(this);
             }
         }
@@ -56,6 +64,7 @@ public class PlayerInteract : MonoBehaviour
         {
             curInteract?.OnExitHit(this);
             curInteract = null;
+            interactUI.SetActive(false);
         }
     }
 }

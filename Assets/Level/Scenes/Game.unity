@@ -119,6 +119,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &247509787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9024527526578836687, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+  m_PrefabInstance: {fileID: 1295473812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &247509789 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1051137863300421678, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+  m_PrefabInstance: {fileID: 1295473812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &529889592
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +176,7 @@ MonoBehaviour:
   mainSceneName: Main
   gameSceneName: Game
   deadSceneName: Dead
+  endingSceneName: Ending
 --- !u!1 &923336747
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +464,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5003844756217687426, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+      propertyPath: director
+      value: 
+      objectReference: {fileID: 1428617633}
     - target: {fileID: 6322839789111385939, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
       propertyPath: m_Name
       value: StagePack
@@ -460,8 +475,46 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3453690645725202632, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1428617633}
   m_SourcePrefab: {fileID: 100100000, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+--- !u!1 &1428617631 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3453690645725202632, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+  m_PrefabInstance: {fileID: 1295473812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!320 &1428617633
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428617631}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -6093828891264549245, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+    value: {fileID: 247509787}
+  - key: {fileID: -594050794066414434, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+    value: {fileID: 247509789}
+  - key: {fileID: 3470527115316914786, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+    value: {fileID: 1673874055}
+  - key: {fileID: -8206819341060931785, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+    value: {fileID: 1428617634}
+  m_ExposedReferences:
+    m_References: []
+--- !u!82 &1428617634 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8366208852643720858, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+  m_PrefabInstance: {fileID: 1295473812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1485258949
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +685,11 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!95 &1673874055 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5920239851188999865, guid: e0ab2d1c8c9843142b2560354682a555, type: 3}
+  m_PrefabInstance: {fileID: 1295473812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

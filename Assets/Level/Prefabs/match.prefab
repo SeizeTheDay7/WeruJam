@@ -206,6 +206,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2715127727111100628}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4972512611239059385}
   m_SourcePrefab: {fileID: 100100000, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}
 --- !u!1 &5017853413794645548 stripped
 GameObject:
@@ -231,50 +234,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shader: {fileID: 2715127727111100628}
-  weaponLight: {fileID: 5319959563262252732}
-  extinguishCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.014328003
-      value: 0.9984131
-      inSlope: -7.3810234
-      outSlope: -7.3810234
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.10629442
-      value: 0.31960675
-      inSlope: -1.1004753
-      outSlope: -1.1004753
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.06335719
-    - serializedVersion: 3
-      time: 0.39766747
-      value: 0.034393407
-      inSlope: -0.3860495
-      outSlope: -0.3860495
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.0883948
-    - serializedVersion: 3
-      time: 0.99487305
-      value: 0
-      inSlope: -0.057590567
-      outSlope: -0.057590567
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  extinguishCurveDuration: 1.5
+  extinguishDuration: 2
 --- !u!54 &3915280655383536334
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -335,8 +295,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0fc314cfa3aa547ada5ad2e2758857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  duration: 1
   PropertyName: BurnLerp
+--- !u!82 &4972512611239059385
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017853413794645548}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1958613509379388804, guid: 682fdf11417948f4c84465e0dfe2bafe, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 95552f2932353a643a0e7e3b2a6d556d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.531
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &5686128456862424214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5c25d1efe805914f8f5922d6e6ebcc5, type: 3}

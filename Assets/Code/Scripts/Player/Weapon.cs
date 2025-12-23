@@ -8,22 +8,19 @@ public class Weapon : MonoBehaviour
     [SerializeField] LayerMask groundMask;
     [SerializeField] LayerMask enemyMask;
     [SerializeField] Adjuster_MarchShader shader;
-    [SerializeField] Light weaponLight;
-    [SerializeField] AnimationCurve extinguishCurve;
-    [SerializeField] float extinguishCurveDuration = 5f;
-    float extinguishStartTime;
+    [SerializeField] float extinguishDuration = 2f;
 
     public event Action<Weapon> OnDestroyed;
     Rigidbody rb;
     bool isTerminated = false;
     Transform currnetFollow;
-    bool isExtinguishing = false;
-    float initLightIntensity;
+
+    AudioSource audioSource;
 
     void Awake()
     {
-        initLightIntensity = 15f;
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -32,12 +29,6 @@ public class Weapon : MonoBehaviour
         {
             transform.position = currnetFollow.position;
             transform.rotation = currnetFollow.rotation;
-        }
-
-        if (isExtinguishing)
-        {
-            float t = (Time.time - extinguishStartTime) / extinguishCurveDuration;
-            weaponLight.intensity = extinguishCurve.Evaluate(t) * initLightIntensity;
         }
     }
 
@@ -51,7 +42,7 @@ public class Weapon : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.Die();
+                enemy.Die(true);
                 Terminate();
             }
         }
@@ -71,6 +62,7 @@ public class Weapon : MonoBehaviour
 
     public void LightUp()
     {
+        audioSource.Play();
         shader.OnFire(1f);
     }
 
@@ -87,10 +79,7 @@ public class Weapon : MonoBehaviour
     {
         if (isTerminated) return;
         isTerminated = true;
-
         ResetVelocity();
-        rb.isKinematic = true;
-
         StartCoroutine(CoDestroy());
     }
 
@@ -102,9 +91,11 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator CoDestroy()
     {
-        isExtinguishing = true;
-        extinguishStartTime = Time.time;
-        yield return new WaitForSeconds(extinguishCurveDuration);
+        shader.OffFire(extinguishDuration);
+        yield return new WaitForSeconds(extinguishDuration);
+
+        rb.isKinematic = true;
+        ResetVelocity();
 
         OnDestroyed?.Invoke(this);
     }

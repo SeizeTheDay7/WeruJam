@@ -1,15 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractableDummy : MonoBehaviour, IInteractable
 {
     static readonly int OutlineOn = Shader.PropertyToID("_OutlineOn"); // 셰이더 프로퍼티명
-    Renderer[] rends;
+    List<Renderer> rends;
     MaterialPropertyBlock mpb;
     bool isOn;
 
     void Awake()
     {
-        rends = GetComponentsInChildren<Renderer>(true);
+        rends = new List<Renderer>(GetComponentsInChildren<Renderer>(true));
+        rends.Add(GetComponent<Renderer>());
         mpb = new MaterialPropertyBlock();
     }
 
@@ -36,7 +38,7 @@ public class InteractableDummy : MonoBehaviour, IInteractable
         if (isOn == on) return;
         isOn = on;
 
-        for (int i = 0; i < rends.Length; i++)
+        for (int i = 0; i < rends.Count; i++)
         {
             var r = rends[i];
             r.GetPropertyBlock(mpb);

@@ -6,22 +6,32 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] float life = 30f;
     [HideInInspector] public NavMeshAgent agent;
     [SerializeField] Transform graphic;
-    [SerializeField] float collapseAfter = 3f;
+    [SerializeField] float collapseAfter = 2f;
     public bool isDead { get; private set; } = false;
     public event Action<Enemy> OnCollapse;
+    AudioSource audioSource;
+    float graphicInitY;
+    Collider col;
+    float startTime;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        col = GetComponent<Collider>();
+        graphicInitY = graphic.localPosition.y;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Init()
     {
         // underground에서 기어올라와
         isDead = false;
+        col.enabled = true;
         graphic.DOLocalMoveY(0, 1f).SetEase(Ease.Linear);
+        startTime = Time.time;
     }
 
     public void SetTarget(Transform target)
@@ -35,6 +45,10 @@ public class Enemy : MonoBehaviour
     public void Chase()
     {
         agent.isStopped = false;
+        if (Time.time - startTime > life)
+        {
+            Die(false);
+        }
     }
 
     /// <summary>
@@ -49,11 +63,13 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// 머리에 성냥을 맞았을 때 눈 꺼지고 이동 멈춤. n초 뒤에 pool로 반환
     /// </summary>
-    public void Die()
+    public void Die(bool playAudio)
     {
-        // 눈 빛내는거 없애고 이동 멈추기
         agent.isStopped = true;
         isDead = true;
+        col.enabled = false;
+        if (playAudio) audioSource.Play();
+        graphic.DOLocalMoveY(graphicInitY, collapseAfter).SetEase(Ease.Linear);
         StartCoroutine(CoCollapse());
     }
 

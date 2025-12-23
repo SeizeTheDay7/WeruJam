@@ -28,7 +28,7 @@ Material:
     m_Floats:
     - _BurnLerp: 0
     - _QueueControl: 0
-    - _StepY: 0.57
+    - _StepY: 0.66
     m_Colors:
     - _BurnColor: {r: 0.055999998, g: 0.055999998, b: 0.055999998, a: 1}
   m_BuildTextureStacks: []

@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.Die();
+                enemy.Die(true);
                 Terminate();
             }
         }

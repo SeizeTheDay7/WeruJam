@@ -14,6 +14,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] float rayLength = 10f;
     IInteractable curInteract;
     InputAction interactAction;
+    [SerializeField] GameObject interactUI;
 
     void Awake()
     {
@@ -49,6 +50,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 curInteract?.OnExitHit(this);
                 curInteract = raycastHandler;
+                interactUI.SetActive(true);
                 curInteract.OnHit(this);
             }
         }
@@ -56,6 +58,7 @@ public class PlayerInteract : MonoBehaviour
         {
             curInteract?.OnExitHit(this);
             curInteract = null;
+            interactUI.SetActive(false);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] float life = 30f;
     [HideInInspector] public NavMeshAgent agent;
     [SerializeField] Transform graphic;
     [SerializeField] float collapseAfter = 2f;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     AudioSource audioSource;
     float graphicInitY;
     Collider col;
+    float startTime;
 
     void Awake()
     {
@@ -29,6 +31,7 @@ public class Enemy : MonoBehaviour
         isDead = false;
         col.enabled = true;
         graphic.DOLocalMoveY(0, 1f).SetEase(Ease.Linear);
+        startTime = Time.time;
     }
 
     public void SetTarget(Transform target)
@@ -42,6 +45,10 @@ public class Enemy : MonoBehaviour
     public void Chase()
     {
         agent.isStopped = false;
+        if (Time.time - startTime > life)
+        {
+            Die(false);
+        }
     }
 
     /// <summary>
@@ -56,12 +63,12 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// 머리에 성냥을 맞았을 때 눈 꺼지고 이동 멈춤. n초 뒤에 pool로 반환
     /// </summary>
-    public void Die()
+    public void Die(bool playAudio)
     {
         agent.isStopped = true;
         isDead = true;
         col.enabled = false;
-        audioSource.Play();
+        if (playAudio) audioSource.Play();
         graphic.DOLocalMoveY(graphicInitY, collapseAfter).SetEase(Ease.Linear);
         StartCoroutine(CoCollapse());
     }

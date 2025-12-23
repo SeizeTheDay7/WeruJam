@@ -25,16 +25,16 @@ public class ScreenE : MonoBehaviour
         Debug.Log("ÇöÀç ¾À ÀÌ¸§: " + currentScene.name);
         if(InGameSceneName== currentScene.name)
         {
-            PPMI_InGame_Start2End(0.75f, 0f, InGamePixelationMax);
+            PPMI_InGame_Start2End(1.5f, 0f, InGamePixelationMax);
         }
-        else if(DeadSceneName== currentScene.name)
-        {
-            PPMI_Dead_Start2End(0.75f, 0f, DeadPixelationMax);
-        }
-        else if(EndingSceneName == currentScene.name)
-        {
-            PPMI_Dead_Start2End(0.75f, 0f, DeadPixelationMax);
-        }
+        //else if(DeadSceneName== currentScene.name)
+        //{
+        //    PPMI_Dead_Start2End(1.5f, 0f, DeadPixelationMax);
+        //}
+        //else if(EndingSceneName == currentScene.name)
+        //{
+        //    PPMI_Dead_Start2End(1.5f, 0f, DeadPixelationMax);
+        //}
     }
 
     // ===============================

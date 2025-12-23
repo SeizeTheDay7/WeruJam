@@ -55,8 +55,8 @@ MonoBehaviour:
   avoidAccel: 2.5
   alignAccel: 1
   followAccel: 75
-  shortestCooltime: 5
-  longestCooltime: 50
+  shortestCooltime: 10
+  longestCooltime: 100
   crySounds:
   - {fileID: 8300000, guid: 65723e54675b3ae4f89ba1c7c4f6a159, type: 3}
   - {fileID: 8300000, guid: 351727795c01ee9419a88aab3771f040, type: 3}

@@ -98,7 +98,7 @@ public class EnemyManager : Singleton<EnemyManager>
     private void OnGetEnemyFromPool(Enemy enemy)
     {
         enemy.Init();
-        enemy.transform.position = enemySpawnPosition;
+        enemy.agent.Warp(enemySpawnPosition);
         enemy.gameObject.SetActive(true);
         enemies.Add(enemy);
     }

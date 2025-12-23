@@ -76,6 +76,7 @@ public class Adjuster_MarchShader : MonoBehaviour
         _renderer.material.SetFloat(PropertyName, 1f);
         pointLight.intensity = intensityMax;
         timer = 0f;
+        pointLight.color = ColorUtility.TryParseHtmlString("#0000FF", out var c) ? c : Color.white;
     }
     // User Methods OffFire
     public void OffFire(float Endtime)

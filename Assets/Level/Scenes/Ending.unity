@@ -906,6 +906,7 @@ MonoBehaviour:
   mainSceneName: Main
   gameSceneName: Game
   deadSceneName: Dead
+  endingSceneName: Ending
 --- !u!82 &1247912435
 AudioSource:
   m_ObjectHideFlags: 0
@@ -915,7 +916,7 @@ AudioSource:
   m_GameObject: {fileID: 1247912432}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -3349136089242318700, guid: 682fdf11417948f4c84465e0dfe2bafe, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 799e60698d8601449b77c3f4dda57a15, type: 3}
   m_PlayOnAwake: 1

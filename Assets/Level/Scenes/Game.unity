@@ -3182,6 +3182,7 @@ GameObject:
   - component: {fileID: 702804032}
   - component: {fileID: 702804031}
   - component: {fileID: 702804030}
+  - component: {fileID: 702804035}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -3339,6 +3340,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &702804035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702804029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f4b6966278afc49a37aa599a7d4b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenE
+  PPMI_InGame: {fileID: 2100000, guid: f9de1c449ccdbc64e99e225f5bda7ad3, type: 2}
+  PPMI_Dead: {fileID: 2100000, guid: 67c34204e7055fd469431d6f3e3a2d78, type: 2}
 --- !u!1001 &704131729
 PrefabInstance:
   m_ObjectHideFlags: 0

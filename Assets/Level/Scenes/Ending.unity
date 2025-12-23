@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 216969956}
   - component: {fileID: 216969959}
   - component: {fileID: 216969960}
+  - component: {fileID: 216969961}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -289,6 +290,20 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &216969961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216969955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f4b6966278afc49a37aa599a7d4b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenE
+  PPMI_InGame: {fileID: 2100000, guid: f9de1c449ccdbc64e99e225f5bda7ad3, type: 2}
+  PPMI_Dead: {fileID: 2100000, guid: 67c34204e7055fd469431d6f3e3a2d78, type: 2}
 --- !u!1 &408472812
 GameObject:
   m_ObjectHideFlags: 0

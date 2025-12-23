@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   PropertyName: BurnLerp
+  VFX_Prefab: {fileID: 3144783372332620011, guid: 687a802518f8f284daccddc00857a1db, type: 3}
 --- !u!82 &4972512611239059385
 AudioSource:
   m_ObjectHideFlags: 0

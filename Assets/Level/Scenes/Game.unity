@@ -632,6 +632,21 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8186f6345b64e7f4b80f9e1849a26f6d, type: 3}
+--- !u!1 &143047168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8627655924815599777, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
+  m_PrefabInstance: {fileID: 758320674277131781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &143047170 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 292871362562151488, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
+  m_PrefabInstance: {fileID: 758320674277131781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &147636552 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6390311440089193175, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
+  m_PrefabInstance: {fileID: 758320674277131781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &150672421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2635,7 +2650,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2661,8 +2676,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702804029}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7069834, z: 0, w: 0.7072302}
-  m_LocalPosition: {x: 2813.3801, y: 69.87142, z: 227.08}
+  m_LocalRotation: {x: -0.10384359, y: 0.8959188, z: -0.3027493, w: -0.3080405}
+  m_LocalPosition: {x: 2132.685, y: 28.885754, z: 482.22803}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2938,6 +2953,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1892432394654570375, guid: c8ad7b2ca12f0174c92762b3bb1a4c56, type: 3}
   m_PrefabInstance: {fileID: 767250523}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &791002564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2696497268370998438, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
+  m_PrefabInstance: {fileID: 758320674277131781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &791002565 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9123349474932187892, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
+  m_PrefabInstance: {fileID: 758320674277131781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!320 &791002570
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791002564}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -6093828891264549245, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+    value: {fileID: 143047168}
+  - key: {fileID: -594050794066414434, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+    value: {fileID: 143047170}
+  - key: {fileID: 3470527115316914786, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+    value: {fileID: 147636552}
+  - key: {fileID: -8206819341060931785, guid: 00ab5d0be2a71094db8e071ab04f6063, type: 2}
+    value: {fileID: 791002565}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1001 &798678848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6506,7 +6556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 455444888962983523, guid: b6bbbd6f890712e4d94235b693138f85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.7609997
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 455444888962983523, guid: b6bbbd6f890712e4d94235b693138f85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7408,7 +7458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 455444888962983523, guid: b6bbbd6f890712e4d94235b693138f85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.7609997
+      value: 4.391
       objectReference: {fileID: 0}
     - target: {fileID: 455444888962983523, guid: b6bbbd6f890712e4d94235b693138f85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7952,7 +8002,7 @@ PrefabInstance:
     - target: {fileID: 5762112635723358700, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
       propertyPath: director
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 791002570}
     - target: {fileID: 5762112635723358700, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
       propertyPath: enemyManager
       value: 
@@ -7984,7 +8034,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2696497268370998438, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 791002570}
   m_SourcePrefab: {fileID: 100100000, guid: 71f791c0bdbb90d4ba1c4f300085a98b, type: 3}
 --- !u!222 &915193567724603199
 CanvasRenderer:
@@ -9512,11 +9565,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641610184252935247, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 663.53
       objectReference: {fileID: 0}
     - target: {fileID: 1641610184252935247, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 185.2
       objectReference: {fileID: 0}
     - target: {fileID: 2350956315310027378, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: blackoutCanvas
@@ -9529,6 +9582,10 @@ PrefabInstance:
     - target: {fileID: 5105935333527093679, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5105935333527093679, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098587500663310960, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_Resource

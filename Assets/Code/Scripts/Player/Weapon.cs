@@ -15,9 +15,12 @@ public class Weapon : MonoBehaviour
     bool isTerminated = false;
     Transform currnetFollow;
 
+    AudioSource audioSource;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -59,6 +62,7 @@ public class Weapon : MonoBehaviour
 
     public void LightUp()
     {
+        audioSource.Play();
         shader.OnFire(1f);
     }
 
@@ -75,6 +79,7 @@ public class Weapon : MonoBehaviour
     {
         if (isTerminated) return;
         isTerminated = true;
+        ResetVelocity();
         StartCoroutine(CoDestroy());
     }
 

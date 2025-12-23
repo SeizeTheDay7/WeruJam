@@ -14,8 +14,8 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] GameObject[] enemyPrefabs;
 
     [Header("Parameter - Spawn")]
-    [SerializeField] int spawnAmount = 8;
-    [SerializeField] float spawnInterval = 3f;
+    public int spawnAmount = 8;
+    public float spawnInterval = 3f;
     [SerializeField] float mapMaxHeight = 90f;
     [SerializeField] float checkRayLength = 100f;
 

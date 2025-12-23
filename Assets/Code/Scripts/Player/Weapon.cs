@@ -8,21 +8,15 @@ public class Weapon : MonoBehaviour
     [SerializeField] LayerMask groundMask;
     [SerializeField] LayerMask enemyMask;
     [SerializeField] Adjuster_MarchShader shader;
-    [SerializeField] Light weaponLight;
-    [SerializeField] AnimationCurve extinguishCurve;
-    [SerializeField] float extinguishCurveDuration = 5f;
-    float extinguishStartTime;
+    [SerializeField] float extinguishDuration = 2f;
 
     public event Action<Weapon> OnDestroyed;
     Rigidbody rb;
     bool isTerminated = false;
     Transform currnetFollow;
-    bool isExtinguishing = false;
-    float initLightIntensity;
 
     void Awake()
     {
-        initLightIntensity = 15f;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -32,12 +26,6 @@ public class Weapon : MonoBehaviour
         {
             transform.position = currnetFollow.position;
             transform.rotation = currnetFollow.rotation;
-        }
-
-        if (isExtinguishing)
-        {
-            float t = (Time.time - extinguishStartTime) / extinguishCurveDuration;
-            weaponLight.intensity = extinguishCurve.Evaluate(t) * initLightIntensity;
         }
     }
 
@@ -102,9 +90,8 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator CoDestroy()
     {
-        isExtinguishing = true;
-        extinguishStartTime = Time.time;
-        yield return new WaitForSeconds(extinguishCurveDuration);
+        shader.OffFire(extinguishDuration);
+        yield return new WaitForSeconds(extinguishDuration);
 
         OnDestroyed?.Invoke(this);
     }

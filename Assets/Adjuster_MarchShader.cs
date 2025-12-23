@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.VFX;
 
 public class Adjuster_MarchShader : MonoBehaviour
 {
@@ -11,10 +12,14 @@ public class Adjuster_MarchShader : MonoBehaviour
     private string PropertyName;
     private GameObject Socket;
     private Light pointLight;
+    [SerializeField]
+    private GameObject VFX_Prefab;
+    private GameObject obj;
+
     // Internal calculation variables
     private bool isLoopingFire = false;
-    private float intensityMax = 5f;
-    private float intensityOffset = 10f;
+    private float intensityMax = 2f;
+    private float intensityOffset = 3f;
     private float timer = 0f;
     // Unity Methods
     private void Awake()
@@ -49,8 +54,10 @@ public class Adjuster_MarchShader : MonoBehaviour
     public void OnFire(float EndTime)
     {
         print("OnFire");
-        StartCoroutine(OnFire_CallEveryFrameForSeconds(EndTime));
+        obj = Instantiate(VFX_Prefab, Socket.transform);
+        obj.transform.localScale = Vector3.zero;
         timer = 0f;
+        StartCoroutine(OnFire_CallEveryFrameForSeconds(EndTime));
     }
     private IEnumerator OnFire_CallEveryFrameForSeconds(float seconds)
     {
@@ -70,13 +77,14 @@ public class Adjuster_MarchShader : MonoBehaviour
     {
         _renderer.material.SetFloat(PropertyName, t01);
         pointLight.intensity = Mathf.Lerp(0f, intensityMax, t01);
+        obj.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t01);
     }
     private void OnFire_Finished()
     {
         _renderer.material.SetFloat(PropertyName, 1f);
         pointLight.intensity = intensityMax;
+        obj.transform.localScale = Vector3.one;
         timer = 0f;
-        pointLight.color = ColorUtility.TryParseHtmlString("#0000FF", out var c) ? c : Color.white;
     }
     // User Methods OffFire
     public void OffFire(float Endtime)
@@ -103,12 +111,14 @@ public class Adjuster_MarchShader : MonoBehaviour
     {
         _renderer.material.SetFloat(PropertyName, 1f-t01);
         pointLight.intensity = Mathf.Lerp(tempintensity, 0f, t01);
+        obj.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, t01);
     }
     private void OffFire_Finished()
     {
         _renderer.material.SetFloat(PropertyName, 0f);
         pointLight.intensity = 0f;
         timer = 0f;
+        Destroy(obj);
     }
 
 }

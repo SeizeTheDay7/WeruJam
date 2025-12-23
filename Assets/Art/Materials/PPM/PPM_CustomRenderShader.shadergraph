@@ -172,6 +172,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "42391fa164354b8a929e2d7b24ea90b5"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "80e48d56f31c4944ab8b0331b054cbaf"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "5b06427eebc24cc8932e3862dbf3ea5e"
                 },
                 "m_SlotId": 3
@@ -304,20 +318,6 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "80e48d56f31c4944ab8b0331b054cbaf"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "a8c3b57d585c4fada6221a5bf8147743"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
                     "m_Id": "f002f9e166ee4c30874655ecfc642833"
                 },
                 "m_SlotId": 2
@@ -424,15 +424,15 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": -21.99990463256836,
-            "y": 344.0
+            "x": 187.00010681152345,
+            "y": 291.99993896484377
         },
         "m_Blocks": []
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": -34.99995803833008,
-            "y": 488.9999694824219
+            "x": 174.0,
+            "y": 677.0
         },
         "m_Blocks": [
             {
@@ -2717,8 +2717,8 @@
     "m_ObjectId": "f096c790f3cd415da01e47d958dcdac1",
     "m_Title": "Mask Out Skydome with Depth Buffer",
     "m_Position": {
-        "x": -2435.999755859375,
-        "y": 840.0000610351563
+        "x": -2436.0,
+        "y": 840.0
     }
 }
 

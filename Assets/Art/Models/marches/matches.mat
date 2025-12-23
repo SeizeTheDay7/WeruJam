@@ -26,7 +26,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _BurnLerp: 1
+    - _BurnLerp: 0
     - _QueueControl: 0
     - _StepY: 0.57
     m_Colors:

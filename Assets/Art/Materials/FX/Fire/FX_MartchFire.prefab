@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1909593359079850496}
-  - component: {fileID: 2605043190626337599}
-  - component: {fileID: 599896185981370117}
+  - component: {fileID: 5261899355996573965}
+  - component: {fileID: 160014108323870309}
   m_Layer: 0
   m_Name: FX_MartchFire
   m_TagString: Untagged
@@ -27,13 +27,13 @@ Transform:
   m_GameObject: {fileID: 3144783372332620011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &2605043190626337599
+--- !u!2083052967 &5261899355996573965
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,12 +41,12 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3144783372332620011}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: b36ab3434c2fea0449eb6fa30d59749a, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: edf84d41314f85c43938e061cecd631d, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
-  m_AllowInstancing: 1
+  m_AllowInstancing: 0
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
@@ -71,7 +71,7 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &599896185981370117
+--- !u!73398921 &160014108323870309
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0

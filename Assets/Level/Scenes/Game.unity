@@ -2650,7 +2650,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2676,8 +2676,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702804029}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.10384359, y: 0.8959188, z: -0.3027493, w: -0.3080405}
-  m_LocalPosition: {x: 2132.685, y: 28.885754, z: 482.22803}
+  m_LocalRotation: {x: 0, y: -0.7069834, z: 0, w: 0.7072302}
+  m_LocalPosition: {x: 2813.3801, y: 69.87142, z: 227.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9541,7 +9541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1604655528857971514, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1604655528857971514, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_LocalRotation.y
@@ -9549,7 +9549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1604655528857971514, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1604655528857971514, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9565,11 +9565,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641610184252935247, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 663.53
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1641610184252935247, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 185.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2350956315310027378, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: blackoutCanvas
@@ -9585,7 +9585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5105935333527093679, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8098587500663310960, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: m_Resource

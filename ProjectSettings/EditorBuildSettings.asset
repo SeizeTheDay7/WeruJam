@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Level/Scenes/Game.unity
     guid: 15eb1511dd28dc34b9826d5c1e557479
   - enabled: 1
-    path: Assets/Level/Scenes/huzino15.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
     path: Assets/Level/Scenes/Dead.unity
     guid: 999254908f1b8bb45bf22ac9baa41551
   - enabled: 1

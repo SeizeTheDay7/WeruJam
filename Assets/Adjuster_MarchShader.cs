@@ -46,7 +46,7 @@ public class Adjuster_MarchShader : MonoBehaviour
     {
         if (!isLoopingFire) { return; }
 
-        timer += Time.deltaTime;
+        timer += Time.deltaTime*1.5f;
         pointLight.intensity = intensityMax + Mathf.PingPong(timer, intensityOffset);
     }
 
@@ -85,6 +85,7 @@ public class Adjuster_MarchShader : MonoBehaviour
         pointLight.intensity = intensityMax;
         obj.transform.localScale = Vector3.one;
         timer = 0f;
+        isLoopingFire = true;
     }
     // User Methods OffFire
     public void OffFire(float Endtime)

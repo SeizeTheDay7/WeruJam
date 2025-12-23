@@ -424,15 +424,15 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 187.00010681152345,
-            "y": 291.99993896484377
+            "x": -21.99990463256836,
+            "y": 344.0
         },
         "m_Blocks": []
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 174.0,
-            "y": 677.0
+            "x": -34.99995803833008,
+            "y": 488.9999694824219
         },
         "m_Blocks": [
             {
@@ -2717,7 +2717,7 @@
     "m_ObjectId": "f096c790f3cd415da01e47d958dcdac1",
     "m_Title": "Mask Out Skydome with Depth Buffer",
     "m_Position": {
-        "x": -2436.0,
+        "x": -2436.666748046875,
         "y": 840.0
     }
 }

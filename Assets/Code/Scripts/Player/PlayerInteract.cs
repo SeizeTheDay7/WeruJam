@@ -16,6 +16,7 @@ public class PlayerInteract : MonoBehaviour
     IInteractable curInteract;
     InputAction interactAction;
     [SerializeField] GameObject interactUI;
+    [SerializeField] AudioSource rechargeAudio;
 
     void Awake()
     {
@@ -36,7 +37,11 @@ public class PlayerInteract : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        curInteract?.OnInteract(this);
+        if (curInteract != null)
+        {
+            curInteract.OnInteract(this);
+            rechargeAudio.Play();
+        }
     }
 
     void Update()

@@ -172,6 +172,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "42391fa164354b8a929e2d7b24ea90b5"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "80e48d56f31c4944ab8b0331b054cbaf"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "5b06427eebc24cc8932e3862dbf3ea5e"
                 },
                 "m_SlotId": 3
@@ -291,20 +305,6 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "9a43980c6a6c4c179eecdff1262dad6a"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "a8c3b57d585c4fada6221a5bf8147743"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "80e48d56f31c4944ab8b0331b054cbaf"
                 },
                 "m_SlotId": 0
             }
@@ -2717,8 +2717,8 @@
     "m_ObjectId": "f096c790f3cd415da01e47d958dcdac1",
     "m_Title": "Mask Out Skydome with Depth Buffer",
     "m_Position": {
-        "x": -2435.999755859375,
-        "y": 840.0000610351563
+        "x": -2436.666748046875,
+        "y": 840.0
     }
 }
 

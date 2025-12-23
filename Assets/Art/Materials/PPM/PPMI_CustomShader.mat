@@ -108,7 +108,7 @@ Material:
     - _FogColor: 1
     - _FogContrast: 1
     - _FogDistance: 30
-    - _FogMixer: 1
+    - _FogMixer: 0.98
     - _FogMixerMax: 0.95
     - _FogMixerMin: 1.31
     - _GlossMapScale: 0
@@ -117,7 +117,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Pixelation: 60
+    - _Pixelation: 100
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5

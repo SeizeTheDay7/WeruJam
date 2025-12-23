@@ -75,10 +75,6 @@ public class Weapon : MonoBehaviour
     {
         if (isTerminated) return;
         isTerminated = true;
-
-        ResetVelocity();
-        rb.isKinematic = true;
-
         StartCoroutine(CoDestroy());
     }
 
@@ -92,6 +88,9 @@ public class Weapon : MonoBehaviour
     {
         shader.OffFire(extinguishDuration);
         yield return new WaitForSeconds(extinguishDuration);
+
+        rb.isKinematic = true;
+        ResetVelocity();
 
         OnDestroyed?.Invoke(this);
     }

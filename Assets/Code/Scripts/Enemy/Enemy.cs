@@ -8,19 +8,26 @@ public class Enemy : MonoBehaviour
 {
     [HideInInspector] public NavMeshAgent agent;
     [SerializeField] Transform graphic;
-    [SerializeField] float collapseAfter = 3f;
+    [SerializeField] float collapseAfter = 2f;
     public bool isDead { get; private set; } = false;
     public event Action<Enemy> OnCollapse;
+    AudioSource audioSource;
+    float graphicInitY;
+    Collider col;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        col = GetComponent<Collider>();
+        graphicInitY = graphic.localPosition.y;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Init()
     {
         // underground에서 기어올라와
         isDead = false;
+        col.enabled = true;
         graphic.DOLocalMoveY(0, 1f).SetEase(Ease.Linear);
     }
 
@@ -51,9 +58,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void Die()
     {
-        // 눈 빛내는거 없애고 이동 멈추기
         agent.isStopped = true;
         isDead = true;
+        col.enabled = false;
+        audioSource.Play();
+        graphic.DOLocalMoveY(graphicInitY, collapseAfter).SetEase(Ease.Linear);
         StartCoroutine(CoCollapse());
     }
 

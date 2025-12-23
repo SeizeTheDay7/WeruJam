@@ -38,6 +38,18 @@ public class EnemyManager : Singleton<EnemyManager>
     float cosThreshold;
     bool isShutdown = false;
 
+    public void Clear()
+    {
+        var snapshot = new List<Enemy>(enemies);
+
+        foreach (var enemy in snapshot)
+        {
+            if (enemy == null) continue;
+            enemyPool.Release(enemy);
+        }
+        enemies.Clear();
+    }
+
     public void Shutdown()
     {
         isShutdown = true;

@@ -6,6 +6,7 @@ public class SceneManager : Singleton<SceneManager>
     [SerializeField] string mainSceneName = "Main";
     [SerializeField] string gameSceneName = "Game";
     [SerializeField] string deadSceneName = "Dead";
+    [SerializeField] string endingSceneName = "Ending";
 
     [Button]
     public void GoToMain()
@@ -22,6 +23,11 @@ public class SceneManager : Singleton<SceneManager>
     public void GoToDead()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(deadSceneName);
+    }
+
+    public void GoToEnding()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(endingSceneName);
     }
 
     public void Quit()

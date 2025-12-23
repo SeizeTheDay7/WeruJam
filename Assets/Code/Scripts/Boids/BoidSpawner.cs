@@ -19,6 +19,15 @@ public class BoidSpawner : MonoBehaviour
     Vector2 YLimit;
     Vector2 ZLimit;
 
+    public void Clear()
+    {
+        foreach (var boid in boids)
+        {
+            Destroy(boid.gameObject);
+        }
+        boids.Clear();
+    }
+
     void Awake()
     {
         boids = new List<Boid>(crowAmount);

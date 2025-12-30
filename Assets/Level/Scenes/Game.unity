@@ -10864,6 +10864,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2247702835954984302, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
+      propertyPath: runMult
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2350956315310027378, guid: cbd6de5169aee0046972e2156342f9d9, type: 3}
       propertyPath: blackoutCanvas
       value: 

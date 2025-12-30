@@ -15,11 +15,6 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Speed")]
     public float moveSpeed = 5f;
-    [SerializeField] float fullRunTime = 5f; // 달리기 최대 시간
-    [SerializeField] float runRecoveryCoolTime = 1.5f; // 몇 초 안 달려야 달리기 회복할지
-    [SerializeField] float runRecoverySpeed = 5f;
-    [SerializeField] float minRunnableTime = 2f; // 몇 초 채워져야 다시 달릴 수 있을지
-    // [SerializeField] float gravityMult = 3f;
     [SerializeField] float jumpMult = 1f;
     [SerializeField] float runMult = 1.5f;
 
@@ -30,6 +25,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private AudioSource footstep;
 
     [Header("Camera")]
+    [SerializeField] float fov_Die = 30f;
     [SerializeField] float amplitudeGain_walk = 2f;
     [SerializeField] float frequencyGain_walk = 1.5f;
     [SerializeField] float amplitudeGain_run = 3f;
@@ -49,10 +45,6 @@ public class PlayerMove : MonoBehaviour
     private float gravity = -9.81f;
     private float verticalVelocity;
     Vector3 direction = new();
-    float lastRunTime;
-    float runTimeLeft;
-    bool isExhausted = false;
-    bool isRunning = false;
     bool isDead = false;
     Vector3 targetPos;
 
@@ -62,7 +54,7 @@ public class PlayerMove : MonoBehaviour
 
         enemy.transform.LookAt(transform);
 
-        player_vcam.Lens.FieldOfView = 25f;
+        player_vcam.Lens.FieldOfView = fov_Die;
         player_vcam.GetComponent<CinemachinePanTilt>().enabled = false;
         var perlin = player_vcam.GetComponent<CinemachineBasicMultiChannelPerlin>();
         perlin.AmplitudeGain = amplitudeGain_Die;
@@ -84,8 +76,6 @@ public class PlayerMove : MonoBehaviour
         moveAction = actions.FindAction("Move");
         jumpAction = actions.FindAction("Jump");
         leftShiftAction = actions.FindAction("LeftShift");
-
-        runTimeLeft = fullRunTime;
     }
 
     void OnEnable()
@@ -94,8 +84,6 @@ public class PlayerMove : MonoBehaviour
         moveAction.Enable();
         jumpAction.Enable();
         leftShiftAction.Enable();
-        leftShiftAction.started += TryRunning;
-        leftShiftAction.canceled += EndRunning;
     }
 
     void OnDisable()
@@ -103,8 +91,6 @@ public class PlayerMove : MonoBehaviour
         moveAction.Disable();
         jumpAction.Disable();
         leftShiftAction.Disable();
-        leftShiftAction.started -= TryRunning;
-        leftShiftAction.canceled -= EndRunning;
     }
 
     void Update()
@@ -117,7 +103,6 @@ public class PlayerMove : MonoBehaviour
         }
         SyncPlayerBody();
         GetInput();
-        CheckRunning();
         AddCameraMove(direction);
         AddGravity();
         direction.y = verticalVelocity;
@@ -153,47 +138,8 @@ public class PlayerMove : MonoBehaviour
 
         direction.y = 0f; // y축 성분 제거하여 정규화 크기 오염 방지
         direction.Normalize();
-    }
 
-    private void CheckRunning()
-    {
-        // 달리다가 일정 게이지 이하로 떨어지면 바로 못 달리고, 충전돼야 달릴 수 있음
-        // 충전은 마지막 달린 시점부터 일정 시간 지나야 시작됨
-
-        if (isRunning)
-        {
-            direction *= runMult;
-            lastRunTime = Time.time;
-            runTimeLeft -= Time.deltaTime;
-            if (runTimeLeft < minRunnableTime) { isExhausted = true; }
-            if (runTimeLeft < 0f)
-            {
-                runTimeLeft = 0f;
-                isRunning = false;
-            }
-        }
-        else if (Time.time - lastRunTime > runRecoveryCoolTime)
-        {
-            runTimeLeft += runRecoverySpeed * Time.deltaTime;
-            if (runTimeLeft > minRunnableTime) { isExhausted = false; }
-            if (runTimeLeft > fullRunTime) { runTimeLeft = fullRunTime; }
-        }
-    }
-
-    /// <summary>
-    /// LeftShiftAction 누르면 호출됨
-    /// </summary>
-    private void TryRunning(InputAction.CallbackContext ctx)
-    {
-        if (!isExhausted && runTimeLeft > minRunnableTime)
-        {
-            isRunning = true;
-        }
-    }
-
-    private void EndRunning(InputAction.CallbackContext ctx)
-    {
-        isRunning = false;
+        if (leftShiftAction.IsPressed()) direction *= runMult;
     }
 
     private void AddGravity()
@@ -211,7 +157,7 @@ public class PlayerMove : MonoBehaviour
         if (direction != Vector3.zero)
         {
             // 뛰는거
-            if (isRunning)
+            if (leftShiftAction.IsPressed())
             {
                 targetAmplitudeGain = amplitudeGain_run;
                 targetFrequencyGain = frequencyGain_run;

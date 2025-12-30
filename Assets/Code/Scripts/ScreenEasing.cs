@@ -18,12 +18,12 @@ public class ScreenE : MonoBehaviour
 
     void Awake()
     {
-        // ÇöÀç È°¼º ¾À °¡Á®¿À±â
+        // ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
 
-        // ¾À ÀÌ¸§ Ãâ·Â
-        Debug.Log("ÇöÀç ¾À ÀÌ¸§: " + currentScene.name);
-        if(InGameSceneName== currentScene.name)
+        // ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½: " + currentScene.name);
+        if (InGameSceneName == currentScene.name)
         {
             PPMI_InGame_Start2End(1.5f, 0f, InGamePixelationMax);
         }
